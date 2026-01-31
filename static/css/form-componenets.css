@@ -1,0 +1,116 @@
+/* ========================================
+   폼 컴포넌트 스타일
+   - 동행인 수 선택기
+   - 기타 폼 관련 컴포넌트
+======================================== */
+
+/* ========== 동행인 수 선택 스타일 ========== */
+.companion-count-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5em;
+    margin-top: 0.8em;
+}
+
+.count-btn {
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--primary-color);
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.count-btn svg {
+    width: 24px !important;
+    height: 24px !important;
+    stroke-width: 2.5;
+}
+
+.count-btn:hover:not(:disabled) {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.05);
+}
+
+.count-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.count-input {
+    width: 100px;
+    height: 60px;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 700;
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    color: var(--primary-color);
+    background: #f8f9fa;
+    flex-shrink: 0;
+    /* 숫자 스피너 제거 */
+    -moz-appearance: textfield;
+}
+
+.count-input::-webkit-outer-spin-button,
+.count-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.companion-hint {
+    text-align: center;
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 0.5em;
+    font-style: italic;
+}
+
+/* ========== 모바일 최적화 ========== */
+@media (max-width: 768px) {
+    .companion-count-selector {
+        gap: 1em;
+    }
+
+    .count-btn {
+        width: 45px;
+        height: 45px;
+    }
+
+    .count-btn svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    .count-input {
+        width: 80px;
+        height: 55px;
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .count-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .count-btn svg {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    .count-input {
+        width: 70px;
+        height: 50px;
+        font-size: 1.6em;
+    }
+}

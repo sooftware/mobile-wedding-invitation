@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{{ config.content.page_title }}</title>
+    <link rel="icon" href="/static/assets/images/favicon.webp"/>
+
+    <!-- Preload critical images for intro animation -->
+    <link rel="preload" as="image" href="/static/assets/images/animation1.webp" fetchpriority="high"/>
+    <link rel="preload" as="image" href="/static/assets/images/animation2.webp" fetchpriority="high"/>
+    <!-- Preload font data for Vara.js to speed up initial animation -->
+    <link rel="preload" as="fetch" href="/static/assets/fonts/json/Parisienne.json" crossorigin="anonymous"/>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Sans+KR:wght@300;400;500;600;700&family=Sacramento&family=Sriracha&family=Parisienne&display=swap"/>
+
+    <!-- Meta Tags -->
+    <meta property="og:title" content="{{ config.content.meta.title }}"/>
+    <meta property="og:description" content="{{ config.content.meta.description }}"/>
+    <meta property="og:image" content="{{ config.content.meta.image }}"/>
+    <meta property="og:type" content="website"/>
+
+    <!-- 스타일 -->
+    <!-- static/css/*.css 들을 로드하여 main.min.css에 합치므로, 이것만 로드  -->
+    <link rel="stylesheet" href="/static/css/main.min.css">
+    <!-- 커스텀 오버라이드 스타일 -->
+    <link rel="stylesheet" href="/static/css/custom-overrides.css">
+
+</head>
+<body>
+
+<!-- 입장 애니메이션 오버레이 -->
+<div class="intro-animation-overlay" id="intro-animation-overlay">
+    <!-- Scene 1: Soohwan & Soyoung's Wedding Day -->
+    <div class="intro-scene intro-scene-1">
+        <img src="/static/assets/images/animation1.webp" alt="Wedding Couple" class="intro-bg-image">
+
+        <div class="intro-content">
+            <div class="intro-main-text" id="vara-container">
+                <!-- Vara.js will render SVG here -->
+            </div>
+
+            <div class="intro-bottom-text">
+                <span class="intro-bottom-left">{{ config.content.intro_animation.scene1.bottom_left }}</span>
+                <span class="intro-bottom-right">{{ config.content.intro_animation.scene1.bottom_right }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Config Data for JavaScript -->
+<script id="config-data" type="application/json">{{ config | tojson }}</script>
+
+<!-- 커버 섹션 -->
+<section class="cover">
+    <div class="white-gradient-blur"></div>
+    <div class="blur-gradient"></div>
+
+    <div class="names-kr-box">
+        <span class="names kr">{{ config.wedding.groom.name_kr }}</span>
+        <span class="names kr">&</span>
+        <span class="names kr">{{ config.wedding.bride.name_kr }}</span>
+    </div>
+
+    <div class="cover-title-container">
+        <div class="names-en-box">
+            <span class="names en-sacramento">{{ config.wedding.groom.name_en }} & {{ config.wedding.bride.name_en }}</span>
+        </div>
+
+        <div class="event-date-and-place-box">
+            <span class="event-date-and-time kr">{{ config.wedding.date.year }}년 {{ config.wedding.date.month }}월 {{ config.wedding.date.day }}일 ({{ config.wedding.date.day_of_week }}) {{ config.wedding.date.display_time }}</span>
+            <span class="event-place kr">{{ config.wedding.venue.name }}</span>
+        </div>
+    </div>
+</section>
+
+<!-- 편지 섹션 -->
+<section class="letter">
+    <div class="header">
+        <img class="header-deco" src="/static/assets/images/letter-deco.svg" alt="letter header deco" loading="lazy"/>
+        <h2 class="title kr">{{ config.wedding.date.year }}.{{ config.wedding.date.month }}.{{ config.wedding.date.day
+            }}</h2>
+        <p class="sub-title kr">{{ config.content.letter.title }}</p>
+    </div>
+
+    <h1 class="invitation-header">{{ config.content.letter.header }}</h1>
+
+    <div class="letter-container">
+        <p class="letter kr">
+            {{ config.content.letter.content | safe }}
+        </p>
+
+        <div class="family-description kr">
+                <span class="groom-line">
+                    {{ config.wedding.groom.parents.father }} <span class="name-divider">•</span> {{ config.wedding.groom.parents.mother }} 의 {{ config.wedding.groom.birth_order }} <span
+                        class="groom-name">{{ config.wedding.groom.display_name }}</span>
+                </span>
+            <span class="bride-line">
+                    {{ config.wedding.bride.parents.father }} <span class="name-divider">•</span> {{ config.wedding.bride.parents.mother }} 의 {{ config.wedding.bride.birth_order }} <span
+                    class="bride-name">{{ config.wedding.bride.display_name }}</span>
+                </span>
+        </div>
+    </div>
+</section>
+
+<img class="letter-bottom" src="/static/assets/images/letter-bottom.webp" alt="letter bottom" loading="lazy"/>
+
+<!-- 캘린더 섹션 -->
+<section class="calendar">
+    <img class="calendar-deco" src="/static/assets/images/calendar.webp" alt="calendar deco" loading="lazy"/>
+
+    <div class="d-day-display">
+        <table class="countdown-table">
+            <tr class="countdown-labels">
+                <td>{{ config.content.countdown.labels.days }}</td>
+                <td class="separator-cell"></td>
+                <td>{{ config.content.countdown.labels.hour }}</td>
+                <td class="separator-cell"></td>
+                <td>{{ config.content.countdown.labels.min }}</td>
+                <td class="separator-cell"></td>
+                <td>{{ config.content.countdown.labels.sec }}</td>
+            </tr>
+            <tr class="countdown-values">
+                <td id="countdown-days">0</td>
+                <td class="countdown-separator">:</td>
+                <td id="countdown-hours">0</td>
+                <td class="countdown-separator">:</td>
+                <td id="countdown-minutes">0</td>
+                <td class="countdown-separator">:</td>
+                <td id="countdown-seconds">0</td>
+            </tr>
+        </table>
+        <p class="countdown-message" data-template="{{ config.content.countdown.message }}">{{ config.content.countdown.message | replace('{days}일', '<span id="d-day-text">0일</span>') | safe }}</p>
+    </div>
+
+    <div class="calendar-buttons">
+        <button class="calendar-btn google-calendar" onclick="addToGoogleCalendar()">
+            <i data-lucide="plus"></i>
+            {{ config.content.buttons.google_calendar }}
+        </button>
+    </div>
+</section>
+
+<!-- 갤러리 섹션 -->
+<section class="gallery">
+    <p class="snap-subtitle-en">{{ config.content.gallery.subtitle_en }}</p>
+    <div class="header">
+        <h2 class="title kr">{{ config.content.gallery.title }}</h2>
+    </div>
+
+    <!-- 사진 그리드 (3열) -->
+    <div class="photo-grid" id="photo-grid">
+        <!-- 사진들이 JavaScript로 동적 로딩됩니다 -->
+    </div>
+</section>
+
+<!-- 갤러리 라이트박스 -->
+<div class="gallery-lightbox-overlay" id="gallery-lightbox" style="display: none;">
+    <div class="gallery-lightbox-container">
+        <button class="gallery-lightbox-close" onclick="closeGalleryLightbox()">
+            <i data-lucide="x"></i>
+        </button>
+        <button class="gallery-lightbox-nav prev" onclick="navigateLightbox(-1)">
+            <i data-lucide="chevron-left"></i>
+        </button>
+        <img class="gallery-lightbox-image" id="lightbox-image" src="" alt="Gallery image"/>
+        <button class="gallery-lightbox-nav next" onclick="navigateLightbox(1)">
+            <i data-lucide="chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+<!-- 유튜브 비디오 섹션 (임시 주석처리)
+<section class="video-section">
+    <p class="snap-subtitle-en">{{ config.content.video_section.subtitle_en }}</p>
+
+    <div class="header">
+        <h2 class="title kr">{{ config.content.video_section.title }}</h2>
+        <p class="subtitle">{{ config.content.video_section.subtitle }}</p>
+    </div>
+
+    <div class="video-container">
+        <iframe
+            src="https://www.youtube.com/embed/8_SPFgmSVUo?si=anx_MWLAjy9xIa1K"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            loading="lazy"
+            allowfullscreen>
+        </iframe>
+    </div>
+</section>
+-->
+
+<!-- 수정용 비밀번호 입력 모달 -->
+<div class="password-modal" id="edit-modal">
+    <div class="password-modal-content">
+        <h3>{{ config.content.modals.edit_message.title }}</h3>
+        <p>{{ config.content.modals.edit_message.password_prompt }}</p>
+        <input type="password" id="edit-password-input" class="password-input" placeholder="{{ config.content.modals.edit_message.password_placeholder }}"/>
+        <div class="password-buttons">
+            <button class="password-button confirm" id="confirm-edit">{{ config.content.buttons.confirm }}</button>
+            <button class="password-button cancel" onclick="closeEditModal()">{{ config.content.buttons.cancel }}</button>
+        </div>
+    </div>
+</div>
+
+<!-- 수정 폼 모달 -->
+<div class="password-modal" id="edit-form-modal">
+    <div class="password-modal-content" style="max-width: 500px;">
+        <h3>{{ config.content.modals.edit_message.title }}</h3>
+        <div style="margin-bottom: 1em;">
+            <label for="edit-name-input" style="display: block; margin-bottom: 0.5em; font-weight: 600;">{{ config.content.modals.edit_message.name_label }}</label>
+            <input type="text" id="edit-name-input" class="password-input" placeholder="{{ config.content.modals.edit_message.name_placeholder }}" maxlength="20"/>
+        </div>
+        <div style="margin-bottom: 1em;">
+            <label for="edit-message-input" style="display: block; margin-bottom: 0.5em; font-weight: 600;">{{ config.content.modals.edit_message.message_label }}</label>
+            <textarea id="edit-message-input" class="password-input" placeholder="{{ config.content.modals.edit_message.message_placeholder }}" maxlength="500"
+                      style="min-height: 100px; resize: vertical;"></textarea>
+        </div>
+        <div class="password-buttons">
+            <button class="password-button confirm" id="save-edit">{{ config.content.buttons.save }}</button>
+            <button class="password-button cancel" onclick="closeEditFormModal()">{{ config.content.buttons.cancel }}</button>
+        </div>
+    </div>
+</div>
+
+<!-- 삭제용 비밀번호 입력 모달 -->
+<div class="password-modal" id="password-modal">
+    <div class="password-modal-content">
+        <h3>{{ config.content.modals.delete_message.title }}</h3>
+        <p>{{ config.content.modals.delete_message.password_prompt }}</p>
+        <input type="password" id="password-input" class="password-input" placeholder="{{ config.content.modals.delete_message.password_placeholder }}"/>
+        <div class="password-buttons">
+            <button class="password-button confirm" id="confirm-delete">{{ config.content.buttons.delete }}</button>
+            <button class="password-button cancel" onclick="closeDeleteModal()">{{ config.content.buttons.cancel }}</button>
+        </div>
+    </div>
+</div>
+
+<!-- Q&A 섹션 -->
+<section class="qna-section">
+    <p class="snap-subtitle-en">{{ config.content.qna_section.subtitle_en }}</p>
+
+    <div class="header">
+        <h2 class="title kr">{{ config.content.qna_section.title }}</h2>
+        <p class="subtitle">{{ config.content.qna_section.subtitle }}</p>
+    </div>
+
+    <div class="accordion-container" id="qna-accordion">
+        <!-- Q&A 아코디언이 JavaScript로 생성됩니다 -->
+    </div>
+</section>
+
+<!-- 챗봇 섹션 -->
+<div class="chatbot-wrapper">
+    <section class="chatbot-section">
+    <p class="snap-subtitle-en">{{ config.content.chatbot.subtitle_en }}</p>
+
+    <div class="header">
+        <h2 class="title">{{ config.content.chatbot.title }}</h2>
+        <p class="subtitle">
+            {{ config.content.chatbot.subtitle }}
+        </p>
+    </div>
+
+    <div class="chatbot-container" style="background-color: #FFFFFF !important;">
+        <!-- 챗봇 헤더 -->
+        <div class="chatbot-header">
+            <div class="chatbot-profile">
+                <img src="{{ config.content.chatbot.profile_image }}" alt="챗봇 프로필" loading="lazy" />
+            </div>
+            <div class="chatbot-info">
+                <div class="chatbot-name">{{ config.content.chatbot.name }}</div>
+                <div class="chatbot-status">
+                    <div class="status-dot"></div>
+                    <span>{{ config.content.chatbot.status_online }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 채팅 영역 -->
+        <div class="chat-area" id="chat-area">
+            <!-- 메시지들이 여기에 동적으로 추가됩니다 -->
+        </div>
+
+        <!-- 입력 영역 -->
+        <div class="chat-input-area">
+            <div class="chat-input-container">
+                <textarea
+                    id="chat-input"
+                    class="chat-input"
+                    placeholder="{{ config.content.chatbot.placeholder }}"
+                    rows="1"
+                ></textarea>
+                <button id="chat-send-button" class="chat-send-button">
+                    <i data-lucide="send"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- 위치 섹션 -->
+<section class="location">
+    <p class="snap-subtitle-en">{{ config.content.location.subtitle_en }}</p>
+
+    <div class="header">
+        <h2 class="title kr">{{ config.content.location.title }}</h2>
+    </div>
+
+    <!-- 탭 네비게이션 -->
+    <div class="location-tabs">
+        <div class="location-tab-indicator" id="location-tab-indicator"></div>
+        <button class="location-tab active" onclick="switchLocationTab('dining')">{{ config.content.location.tabs.dining }}</button>
+        <button class="location-tab" onclick="switchLocationTab('transport')">{{ config.content.location.tabs.transport }}</button>
+    </div>
+
+    <!-- 식사 안내 탭 -->
+    <div class="location-content active" id="dining-content">
+        <div class="dining-container">
+            <img src="/static/assets/images/dining-guide.webp" alt="식사 안내" class="dining-image" loading="lazy"/>
+            <div class="dining-text">
+                <p>
+                    {{ config.content.location.dining_content.text | safe }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 교통 수단 탭 -->
+    <div class="location-content" id="transport-content">
+        <p class="address-text">{{ config.wedding.venue.full_address }}</p>
+
+        <div class="map-image-container" onclick="openMapLightbox()">
+            <img src="{{ config.assets.map_image }}" alt="{{ config.wedding.venue.name }} 위치 안내도" class="map-image"
+                 loading="lazy"/>
+            <div class="map-click-hint">
+                <span>{{ config.content.location.map_click_hint }}</span>
+            </div>
+        </div>
+
+        <div class="map-buttons-container">
+            <button class="map-button" onclick="window.open('{{ config.external_links.maps.naver }}', '_blank')">
+                <img src="/static/assets/images/naver_Icon.webp" alt="네이버 지도 아이콘" class="map-icon" loading="lazy"/>
+                <span>{{ config.content.location.map_buttons.naver }}</span>
+            </button>
+            <button class="map-button" onclick="window.open('{{ config.external_links.maps.kakao }}', '_blank')">
+                <img src="/static/assets/images/kakaomap-icon.webp" alt="카카오맵 아이콘" class="map-icon" loading="lazy"/>
+                <span>{{ config.content.location.map_buttons.kakao }}</span>
+            </button>
+            <button class="map-button" onclick="window.open('{{ config.external_links.maps.tmap }}', '_blank')">
+                <img src="/static/assets/images/tmap_icon.webp" alt="티맵 지도 아이콘" class="map-icon" loading="lazy"/>
+                <span>{{ config.content.location.map_buttons.tmap }}</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 지도 라이트박스 -->
+    <div class="map-lightbox-overlay" id="map-lightbox" style="display: none;">
+        <div class="map-lightbox-container">
+            <img class="map-lightbox-image" src="{{ config.assets.map_image }}"
+                 alt="{{ config.wedding.venue.name }} 위치 안내도 (확대)"/>
+            <button class="map-lightbox-close" onclick="closeMapLightbox()">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="map-lightbox-info">
+                <span>{{ config.wedding.venue.name }} {{ config.content.location.map_lightbox_info }}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 계좌 정보 섹션 -->
+<section class="account-trapezoid">
+    <p class="snap-subtitle-en">{{ config.content.account_section.subtitle_en }}</p>
+
+    <h2 class="account-title">{{ config.content.account_section.title }}</h2>
+
+    <!-- 아코디언 컨테이너 -->
+    <div class="account-accordion-container">
+        <!-- 신랑 측 아코디언 -->
+        <div class="account-accordion-item" id="groom-accordion">
+            <button class="account-accordion-button" onclick="toggleAccountAccordion('groom')">
+                <span id="groom-button-text">{{ config.content.account_section.groom_button }}</span>
+                <i data-lucide="chevron-down" class="accordion-icon"></i>
+            </button>
+            <div class="account-accordion-content" id="groom-cards">
+                <!-- 동적으로 생성됩니다 -->
+            </div>
+        </div>
+
+        <!-- 신부 측 아코디언 -->
+        <div class="account-accordion-item" id="bride-accordion">
+            <button class="account-accordion-button" onclick="toggleAccountAccordion('bride')">
+                <span id="bride-button-text">{{ config.content.account_section.bride_button }}</span>
+                <i data-lucide="chevron-down" class="accordion-icon"></i>
+            </button>
+            <div class="account-accordion-content" id="bride-cards">
+                <!-- 동적으로 생성됩니다 -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 방명록 섹션 -->
+<section class="guestbook-section">
+    <p class="snap-subtitle-en">{{ config.content.guestbook.subtitle_en }}</p>
+
+    <div class="header">
+        <h2 class="title">{{ config.content.guestbook.title }}</h2>
+        <p class="subtitle">
+            {{ config.content.guestbook.subtitle | safe }}
+        </p>
+    </div>
+
+    <!-- 방명록 메시지 목록 -->
+    <div class="messages-section">
+        <div id="messages-container">
+            <div class="loading-state" id="loading-messages">
+                <div class="loading-spinner"></div>
+                <p>{{ config.content.guestbook.loading_message }}</p>
+            </div>
+        </div>
+
+        <!-- 메시지 페이지네이션 -->
+        <div class="pagination" id="message-pagination" style="display: none;">
+            <!-- 페이지네이션 버튼들 -->
+        </div>
+
+        <!-- 작성하기 버튼 -->
+        <button class="write-button" id="open-guestbook-btn">
+            {{ config.content.buttons.write_message }}
+        </button>
+    </div>
+
+    <!-- 메시지 갯수 표시 (숨김) -->
+    <span id="message-count" style="display: none;">0</span>
+</section>
+
+<!-- Snaps 섹션 -->
+<section class="snaps-section">
+    <div class="header">
+        <!-- 스냅 헤더 이미지 -->
+        <img class="snap-header-image" src="/static/assets/images/snap-header.webp" alt="Snap" loading="lazy"/>
+
+        <!-- 영문 타이틀 -->
+        <p class="snap-subtitle-en">{{ config.content.snaps.subtitle_en }}</p>
+
+        <!-- 메인 타이틀 -->
+        <h2 class="title kr">{{ config.content.snaps.title }}</h2>
+
+        <!-- 설명 텍스트 -->
+        <div class="snap-description">
+            {% for line in config.content.snaps.description %}
+            <p>{{ line }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 업로드 버튼 -->
+    <div class="snap-upload-container">
+        <input type="file" id="snap-upload-input" accept="image/*,video/*" multiple style="display: none;" />
+        <button class="snap-upload-button" onclick="openSnapUpload()">
+            {{ config.content.snaps.upload_button }}
+        </button>
+        <!-- 업로드 가능 시간 안내 -->
+        <p class="snap-upload-notice" id="snap-upload-notice" style="margin-top: 12px; font-size: 14px; color: #888; text-align: center; display: none;">
+            2026-05-17 12:00부터<br/>업로드 가능합니다.
+        </p>
+    </div>
+</section>
+
+<!-- Snaps 업로드 모달 -->
+<div class="snap-upload-modal" id="snap-upload-modal">
+    <div class="snap-upload-modal-content">
+        <h3>{{ config.content.snaps.upload_modal.title }}</h3>
+        <div class="snap-upload-progress-bar">
+            <div class="snap-upload-progress-fill" id="snap-upload-progress"></div>
+        </div>
+        <div class="snap-upload-status" id="snap-upload-status">
+            {{ config.content.snaps.upload_modal.preparing }}
+        </div>
+        <button class="snap-upload-close-btn" id="snap-upload-close" onclick="closeSnapUploadModal()" style="display: none;">
+            {{ config.content.snaps.upload_modal.close_button }}
+        </button>
+    </div>
+</div>
+
+<!-- 공유 섹션 -->
+<section class="share-section">
+    <!-- 배경 이미지 -->
+    <div class="share-image-container">
+        <img src="{{ config.assets.share_background_image }}" alt="커플 이미지" loading="lazy"/>
+
+        <!-- 상단 흰색 그라데이션 -->
+        <div class="share-gradient-top"></div>
+
+        <!-- 하단 흰색 그라데이션 -->
+        <div class="share-gradient-bottom"></div>
+
+        <!-- 텍스트 오버레이 -->
+        <div class="share-text-overlay">
+            <p class="share-message">{{ config.content.image_share.message | safe }}</p>
+        </div>
+    </div>
+
+    <!-- 공유 버튼 (이미지 아래) -->
+    <div class="share-button-container">
+        <button class="share-kakao-button" onclick="shareToKakao()">
+            <img src="/static/assets/images/kakaotalk.webp" alt="카카오톡"/>
+            <span>{{ config.content.buttons.kakao_share }}</span>
+        </button>
+    </div>
+
+</section>
+
+<!-- BGM 알림 배너 (스피커 포함) -->
+<div class="bgm-notification-banner" id="bgm-notification-banner">
+    <span class="bgm-notification-text">{{ config.content.bgm.notification }}</span>
+    <div class="bgm-speaker-control" id="bgm-speaker-control">
+        <button class="bgm-speaker-button" id="bgm-speaker-button" onclick="toggleMusic()">
+            <i data-lucide="volume-2" id="bgm-speaker-icon"></i>
+        </button>
+    </div>
+</div>
+
+<!-- 토스트 메시지 -->
+<div class="share-toast" id="share-toast" style="display: none;">
+    <span id="toast-message"></span>
+</div>
+
+<!-- 계좌 토스트 메시지 -->
+<div class="account-toast" id="account-toast"></div>
+
+<!-- JavaScript -->
+<script>
+    // 서버에서 전달된 환경변수
+    window.KAKAO_APP_KEY = '{{ kakao_app_key }}';
+
+    let weddingConfig;
+
+    // Config 데이터 로드 및 계좌 섹션 초기화
+    function initializeAccountSection() {
+        const configElement = document.getElementById('config-data');
+        if (configElement) {
+            weddingConfig = JSON.parse(configElement.textContent);
+
+            // 버튼 텍스트 설정
+            document.getElementById('groom-button-text').textContent = weddingConfig.content.account_section.groom_button;
+            document.getElementById('bride-button-text').textContent = weddingConfig.content.account_section.bride_button;
+
+            // 계좌 카드 렌더링
+            renderAccountCards('groom');
+            renderAccountCards('bride');
+
+            // 아코디언 및 탭 초기화
+            setTimeout(() => {
+                initAccountAccordion();
+                initLocationTabs();
+            }, 100);
+        }
+    }
+
+    // 계좌 카드 렌더링
+    function renderAccountCards(type) {
+        const container = document.getElementById(`${type}-cards`);
+        const accounts = weddingConfig.accounts[type];
+        const accountConfig = weddingConfig.content.account_section;
+        const kakaotalkIcon = weddingConfig.assets.kakaotalk_icon;
+
+        container.innerHTML = accounts.map(account => `
+            <div class="account-card">
+                <div class="account-card-name">${account.name}</div>
+                <div class="account-card-info">
+                    <div class="account-card-bank-row">
+                        <div class="account-card-bank-info">
+                            <div class="account-card-bank-name">${account.bank}</div>
+                            <div class="account-card-number">${account.number}</div>
+                        </div>
+                        <button class="account-card-copy-button" onclick="copyAccountNumber('${account.number}')">
+                            ${accountConfig.copy_button_text}
+                        </button>
+                    </div>
+                </div>
+                ${account.kakaopay_url ? `
+                    <button class="account-kakaopay-button" onclick="openKakaoPay('${account.kakaopay_url}')">
+                        <span class="kakaopay-button-text">${accountConfig.kakaopay_button_text}</span>
+                        <img src="${kakaotalkIcon}" alt="${accountConfig.kakaopay_alt_text}" class="kakaopay-button-icon" />
+                    </button>
+                ` : ''}
+            </div>
+        `).join('');
+    }
+
+    // 아코디언 토글 함수
+    function toggleAccountAccordion(type) {
+        const accordionItem = document.getElementById(`${type}-accordion`);
+        const content = document.getElementById(`${type}-cards`);
+        const button = accordionItem.querySelector('.account-accordion-button');
+
+        if (accordionItem.classList.contains('active')) {
+            // 닫기
+            accordionItem.classList.remove('active');
+            content.style.maxHeight = null;
+        } else {
+            // 열기
+            accordionItem.classList.add('active');
+            content.style.maxHeight = content.scrollHeight + 'px';
+        }
+    }
+
+    // 아코디언 초기화 (닫힌 상태로 시작)
+    function initAccountAccordion() {
+        document.querySelectorAll('.account-accordion-content').forEach(content => {
+            content.style.maxHeight = null;
+        });
+    }
+
+    // 계좌번호 복사 함수
+    async function copyAccountNumber(accountNumber) {
+        if (!weddingConfig) return;
+
+        const accountConfig = weddingConfig.content.account_section;
+
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(accountNumber);
+            } else {
+                const textArea = document.createElement('textarea');
+                textArea.value = accountNumber;
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+            }
+            showAccountToast(accountConfig.copy_success_message);
+        } catch (error) {
+            console.error('복사 실패:', error);
+            showAccountToast(accountConfig.copy_error_message);
+        }
+    }
+
+    // 카카오페이 링크 열기
+    function openKakaoPay(url) {
+        window.open(url, '_blank');
+    }
+
+    // 계좌 토스트 메시지 표시
+    function showAccountToast(message) {
+        const toast = document.getElementById('account-toast');
+        toast.textContent = message;
+        toast.style.display = 'block';
+
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 3000);
+    }
+
+    // 하위 호환성을 위한 함수들
+    function copyAccount(accountNumber) {
+        copyAccountNumber(accountNumber);
+    }
+
+    // Location 탭 전환 함수
+    let currentLocationTab = 'dining';
+    function switchLocationTab(type) {
+        if (type === currentLocationTab) return;
+
+        // 모든 탭의 active 클래스 제거
+        document.querySelectorAll('.location-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        // 모든 콘텐츠 숨기기
+        document.querySelectorAll('.location-content').forEach(content => {
+            content.classList.remove('active');
+            content.style.display = 'none';
+        });
+
+        // 선택된 콘텐츠 표시
+        const contentId = type + '-content';
+        const selectedContent = document.getElementById(contentId);
+        if (selectedContent) {
+            selectedContent.style.display = 'block';
+            selectedContent.classList.add('active');
+        }
+
+        // 선택된 탭 활성화
+        const selectedTab = Array.from(document.querySelectorAll('.location-tab')).find(tab =>
+            tab.getAttribute('onclick').includes(type)
+        );
+        if (selectedTab) {
+            selectedTab.classList.add('active');
+            updateLocationTabIndicator(selectedTab);
+        }
+
+        currentLocationTab = type;
+    }
+
+    // Location 탭 인디케이터 위치 업데이트
+    function updateLocationTabIndicator(activeTab) {
+        const indicator = document.getElementById('location-tab-indicator');
+        if (!indicator || !activeTab) return;
+
+        const tabsContainer = activeTab.parentElement;
+        const containerRect = tabsContainer.getBoundingClientRect();
+        const tabRect = activeTab.getBoundingClientRect();
+
+        indicator.style.width = `${tabRect.width}px`;
+        indicator.style.transform = `translateX(${tabRect.left - containerRect.left - parseFloat(getComputedStyle(tabsContainer).paddingLeft)}px)`;
+    }
+
+    // Location 탭 초기화
+    function initLocationTabs() {
+        const activeTab = document.querySelector('.location-tab.active');
+        if (activeTab) {
+            updateLocationTabIndicator(activeTab);
+        }
+    }
+
+    // 윈도우 리사이즈 시 인디케이터 위치 재조정
+    window.addEventListener('resize', () => {
+        const activeLocationTab = document.querySelector('.location-tab.active');
+        if (activeLocationTab) {
+            updateLocationTabIndicator(activeLocationTab);
+        }
+
+        // 아코디언 높이 재조정
+        document.querySelectorAll('.account-accordion-item.active').forEach(item => {
+            const content = item.querySelector('.account-accordion-content');
+            if (content) {
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        });
+    });
+</script>
+    <script src="/static/js/vara.min.js"></script>
+    <script src="/static/js/animations.js"></script>
+<script>
+    window.KAKAO_APP_KEY = "{{ kakao_app_key }}";
+</script>
+<script src="/static/js/main.js"></script>
+<script src="/static/js/chatbot.js"></script>
+<script>
+    // 함수를 먼저 정의! (Lucide 로드 전에)
+    function initializeLucideAndPage() {
+        console.log('✅ Lucide 로드 완료!');
+
+        // Lucide 아이콘 초기화
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        // 페이지 초기화
+        initializeAccountSection();
+
+        if (typeof initializePage === 'function') {
+            initializePage();
+        } else {
+            setTimeout(() => {
+                if (typeof initializePage === 'function') {
+                    initializePage();
+                }
+            }, 100);
+        }
+    }
+</script>
+
+<!-- 함수 정의 후에 Lucide 스크립트 로드 - defer로 비동기 로딩 최적화 -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer onload="initializeLucideAndPage()"></script>
+
+<!-- 참석 의사 전달 안내 모달 -->
+<div class="attendance-notice-modal" id="attendance-notice-modal" style="display: none;">
+    <div class="attendance-notice-content">
+        <button class="attendance-notice-close" onclick="closeAttendanceNoticeModal()">
+            <i data-lucide="x"></i>
+        </button>
+        <h2 class="attendance-notice-title">{{ config.content.modals.attendance_notice.title }}</h2>
+
+        <p class="attendance-notice-description">
+            {{ config.content.modals.attendance_notice.description | safe }}
+        </p>
+
+        <div class="attendance-notice-divider"></div>
+
+        <div class="attendance-notice-info">
+            <div class="info-item">
+                <i data-lucide="heart"></i>
+                <span><strong>신랑 {{ config.wedding.groom.name_kr }} & 신부 {{ config.wedding.bride.name_kr }}</strong></span>
+            </div>
+            <div class="info-item">
+                <i data-lucide="calendar"></i>
+                <span>{{ config.wedding.date.year }}년 {{ config.wedding.date.month }}월 {{ config.wedding.date.day }}일 {{ config.wedding.date.day_of_week }}, {{ config.wedding.date.display_time }}</span>
+            </div>
+            <div class="info-item">
+                <i data-lucide="map-pin"></i>
+                <span>{{ config.wedding.venue.name }} {{ config.wedding.venue.hall }}</span>
+            </div>
+        </div>
+
+        <div class="attendance-notice-buttons">
+            <button class="attendance-notice-btn primary" onclick="openRSVPFromNotice()">
+                <i data-lucide="bookmark"></i>
+                <span>{{ config.content.modals.attendance_notice.buttons.rsvp }}</span>
+            </button>
+            <button class="attendance-notice-btn secondary" onclick="hideAttendanceNoticeForToday()">
+                <i data-lucide="check"></i>
+                <span>{{ config.content.modals.attendance_notice.buttons.hide_today }}</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- RSVP 모달 -->
+<div class="form-modal" id="rsvp-modal" style="display: none;">
+    <div class="form-modal-content">
+        <button class="form-modal-close" onclick="closeRSVPModal()">
+            <i data-lucide="x"></i>
+        </button>
+
+        <div class="form-modal-header">
+            <h2 class="form-modal-title">{{ config.content.modals.rsvp.title }}</h2>
+        </div>
+
+        <form id="rsvp-modal-form" onsubmit="submitRSVP(event); return false;">
+            <!-- 참석하실 수 있나요? -->
+            <div class="form-group">
+                <label class="form-label">{{ config.content.modals.rsvp.can_attend_label }} <span class="required">*</span></label>
+                <div class="button-group">
+                    <label class="option-btn">
+                        <input type="radio" name="can-attend" value="{{ config.content.modals.rsvp.can_attend_options.yes }}" required style="display: none;">
+                        {{ config.content.modals.rsvp.can_attend_options.yes }}
+                    </label>
+                    <label class="option-btn">
+                        <input type="radio" name="can-attend" value="{{ config.content.modals.rsvp.can_attend_options.no }}" required style="display: none;">
+                        {{ config.content.modals.rsvp.can_attend_options.no }}
+                    </label>
+                </div>
+            </div>
+
+            <!-- 어느 분의 하객이신가요? -->
+            <div class="form-group">
+                <label class="form-label">{{ config.content.modals.rsvp.which_side_label }} <span class="required">*</span></label>
+                <div class="button-group">
+                    <label class="option-btn">
+                        <input type="radio" name="which-side" value="{{ config.content.modals.rsvp.which_side_options.groom }}" required style="display: none;">
+                        {{ config.content.modals.rsvp.which_side_options.groom }}
+                    </label>
+                    <label class="option-btn">
+                        <input type="radio" name="which-side" value="{{ config.content.modals.rsvp.which_side_options.bride }}" required style="display: none;">
+                        {{ config.content.modals.rsvp.which_side_options.bride }}
+                    </label>
+                </div>
+            </div>
+
+            <!-- 성함 -->
+            <div class="form-group">
+                <label for="rsvp-guest-name" class="form-label">{{ config.content.modals.rsvp.guest_name_label }} <span class="required">*</span></label>
+                <input
+                        id="rsvp-guest-name"
+                        name="guest-name"
+                        type="text"
+                        placeholder="{{ config.content.modals.rsvp.guest_name_placeholder }}"
+                        class="text-input"
+                        required
+                >
+            </div>
+
+            <!-- 추가인원 -->
+            <div class="form-group">
+                <label for="rsvp-companion-extra" class="form-label">{{ config.content.modals.rsvp.companion_extra_label }}</label>
+                <div class="extra-count-container">
+                    <span class="extra-prefix">{{ config.content.modals.rsvp.companion_extra_prefix }}</span>
+                    <input
+                        id="rsvp-companion-extra"
+                        name="companion-extra"
+                        type="number"
+                        value="0"
+                        min="0"
+                        max="9"
+                        class="extra-count-input"
+                    />
+                    <span class="extra-suffix">{{ config.content.modals.rsvp.companion_extra_suffix }}</span>
+                </div>
+            </div>
+
+            <!-- 식사 여부 -->
+            <div class="form-group">
+                <label class="form-label">{{ config.content.modals.rsvp.meal_attendance_label }} <span class="required">*</span></label>
+                <div class="meal-check-group">
+                    <label class="meal-check-option">
+                        <input type="radio" name="meal-attendance" value="{{ config.content.modals.rsvp.meal_attendance_options.yes_value }}" required style="display: none;">
+                        <i data-lucide="circle" class="meal-check-icon checked-icon"></i>
+                        <i data-lucide="circle" class="meal-check-icon unchecked-icon"></i>
+                        <span>{{ config.content.modals.rsvp.meal_attendance_options.yes }}</span>
+                    </label>
+                    <label class="meal-check-option">
+                        <input type="radio" name="meal-attendance" value="{{ config.content.modals.rsvp.meal_attendance_options.no_value }}" required style="display: none;">
+                        <i data-lucide="circle" class="meal-check-icon checked-icon"></i>
+                        <i data-lucide="circle" class="meal-check-icon unchecked-icon"></i>
+                        <span>{{ config.content.modals.rsvp.meal_attendance_options.no }}</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 개인정보 수집 및 이용 동의 -->
+            <div class="form-group">
+                <div class="privacy-consent-header">
+                    <label class="form-label privacy-title">{{ config.content.modals.rsvp.privacy_title }}</label>
+                </div>
+                <p class="privacy-description">
+                    {{ config.content.modals.rsvp.privacy_description | safe }}
+                </p>
+                <label class="privacy-check-option">
+                    <input type="checkbox" id="privacy-consent" name="privacy-consent" required style="display: none;">
+                    <i data-lucide="square" class="privacy-check-icon unchecked-icon"></i>
+                    <i data-lucide="check-square" class="privacy-check-icon checked-icon"></i>
+                    <span>{{ config.content.modals.rsvp.privacy_agree }}</span>
+                </label>
+            </div>
+
+            <!-- 연락처 끝자리 -->
+            <div class="form-group">
+                <label for="rsvp-phone-number" class="form-label">{{ config.content.modals.rsvp.phone_label }}</label>
+                <input
+                        id="rsvp-phone-number"
+                        name="phone-number"
+                        type="text"
+                        placeholder="{{ config.content.modals.rsvp.phone_placeholder }}"
+                        class="text-input"
+                        maxlength="4"
+                >
+            </div>
+
+            <button type="submit" class="submit-btn" id="rsvp-submit-btn">
+                <span id="rsvp-submit-text">{{ config.content.buttons.submit }}</span>
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- 방명록 작성 모달 -->
+<div class="form-modal" id="guestbook-modal" style="display: none;">
+    <div class="form-modal-content">
+        <button class="form-modal-close" onclick="closeGuestbookModal()">
+            <i data-lucide="x"></i>
+        </button>
+
+        <div class="form-modal-header">
+            <h2 class="form-modal-title">{{ config.content.modals.guestbook.title }}</h2>
+            <p class="form-modal-subtitle">
+                {{ config.content.modals.guestbook.subtitle | safe }}
+            </p>
+        </div>
+
+        <form id="guestbook-modal-form" onsubmit="submitGuestbook(event); return false;">
+            <!-- 성함 -->
+            <div class="form-group">
+                <label for="guestbook-modal-name" class="form-label">{{ config.content.modals.guestbook.name_label }} <span class="required">*</span></label>
+                <input
+                    id="guestbook-modal-name"
+                    name="name"
+                    type="text"
+                    placeholder="{{ config.content.modals.guestbook.name_placeholder }}"
+                    class="text-input"
+                    maxlength="20"
+                    required
+                >
+            </div>
+
+            <!-- 축하 메시지 -->
+            <div class="form-group">
+                <label for="guestbook-modal-message" class="form-label">{{ config.content.modals.guestbook.message_label }} <span class="required">*</span></label>
+                <textarea
+                    id="guestbook-modal-message"
+                    name="message"
+                    placeholder="{{ config.content.modals.guestbook.message_placeholder }}"
+                    class="text-input"
+                    maxlength="500"
+                    rows="5"
+                    required
+                ></textarea>
+                <div class="char-counter" id="guestbook-char-counter">0 {{ config.content.modals.guestbook.char_counter }}</div>
+            </div>
+
+            <!-- 비밀번호 -->
+            <div class="form-group">
+                <label for="guestbook-modal-password" class="form-label">{{ config.content.modals.guestbook.password_label }} <span class="required">*</span></label>
+                <input
+                    id="guestbook-modal-password"
+                    name="password"
+                    type="password"
+                    placeholder="{{ config.content.modals.guestbook.password_placeholder }}"
+                    class="text-input"
+                    minlength="4"
+                    required
+                >
+                <div class="form-hint">{{ config.content.modals.guestbook.password_hint }}</div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="guestbook-submit-btn">
+                <span id="guestbook-submit-text">{{ config.content.buttons.write_complete }}</span>
+            </button>
+        </form>
+    </div>
+</div>
+
+<footer class="footer-section">
+    <div class="footer-content">
+        <!-- 방문자 통계 -->
+        <div class="visitor-stats">
+            <span class="stat-item">
+                <i data-lucide="users"></i>
+                {{ config.content.footer.visitor_stats.today }} <strong id="today-count">-</strong>
+            </span>
+            <span class="stat-divider">|</span>
+            <span class="stat-item">
+                {{ config.content.footer.visitor_stats.total }} <strong id="total-count">-</strong>
+            </span>
+        </div>
+
+        <div class="footer-couple">
+            <span class="footer-names en-sacramento">{{ config.wedding.groom.name_en }} & {{ config.wedding.bride.name_en }}</span>
+        </div>
+
+        <div class="footer-date kr">
+            {{ config.wedding.date.year }}. {{ config.wedding.date.month }}. {{ config.wedding.date.day }}
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-copyright">
+            <p class="kr">© {{ config.wedding.date.year }} SOYOUNG & SOOFTWARE</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+/* 유튜브 비디오 섹션 */
+.video-section {
+    padding: 4.5em 2em;
+    background-color: var(--white);
+    max-width: var(--content-max-width);  /* ✅ 추가 */
+    margin: 0 auto;                       /* ✅ 추가 */
+}
+
+.video-section .header {
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.video-section .title {
+    color: var(--primary-color);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 0.5em;
+}
+
+.video-section .subtitle {
+    color: var(--font-color-light);
+    font-size: 0.85em;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.video-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 비율 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    background: #f5f5f5;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 16px;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .video-section {
+        padding: 3em 1.5em;
+    }
+
+    .video-container {
+        border-radius: 12px;
+    }
+
+    .video-container iframe {
+        border-radius: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-section {
+        padding: 2.5em 1em;
+    }
+
+    .video-section .title {
+        font-size: 1.1rem;
+    }
+
+    .video-container {
+        border-radius: 8px;
+    }
+
+    .video-container iframe {
+        border-radius: 8px;
+    }
+}

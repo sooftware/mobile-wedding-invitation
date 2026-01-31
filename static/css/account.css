@@ -1,0 +1,372 @@
+/* 계좌 정보 섹션 */
+.account-trapezoid {
+    background: var(--white);
+    padding: 4em 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.account-title {
+    text-align: center;
+    margin-bottom: 2em;
+    color: var(--primary-color);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* 아코디언 컨테이너 */
+.account-accordion-container {
+    width: 100%;
+    max-width: var(--content-max-width);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+/* 아코디언 아이템 */
+.account-accordion-item {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(185, 148, 147, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.account-accordion-item:hover {
+    box-shadow: 0 4px 16px rgba(185, 148, 147, 0.15);
+    border-color: rgba(185, 148, 147, 0.4);
+}
+
+.account-accordion-item.active {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 20px rgba(185, 148, 147, 0.2);
+}
+
+/* 아코디언 버튼 - FAQ 섹션 스타일과 일치 */
+.account-accordion-button {
+    width: 100%;
+    padding: 1.2em 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border: none;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--font-color-default);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.account-accordion-button::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--primary-color), transparent);
+    transition: width 0.3s ease;
+}
+
+.account-accordion-button:hover {
+    background: rgba(185, 148, 147, 0.05);
+}
+
+.account-accordion-button:hover::before {
+    width: 4px;
+}
+
+.account-accordion-button .accordion-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.account-accordion-item.active .account-accordion-button .accordion-icon {
+    transform: rotate(180deg);
+}
+
+/* 아코디언 콘텐츠 */
+.account-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* 계좌 카드 */
+.account-card {
+    width: 100%;
+    background: white;
+    border: none;
+    border-bottom: 1px solid rgba(185, 148, 147, 0.15);
+    border-radius: 0;
+    padding: 1.5em;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    transition: all 0.3s ease;
+}
+
+.account-card:last-child {
+    border-bottom: none;
+}
+
+.account-card:hover {
+    background: #fff;
+}
+
+/* 카드 내 이름 */
+.account-card-name {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+/* 계좌 정보 섹션 */
+.account-card-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+}
+
+/* 은행명과 계좌번호 행 */
+.account-card-bank-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8em;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.account-card-bank-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.account-card-bank-name {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 0.3em;
+}
+
+.account-card-number {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #333;
+    word-break: break-all;
+}
+
+/* 복사 버튼 */
+.account-card-copy-button {
+    background: white;
+    color: var(--primary-color);
+    border: 1px solid rgba(185, 148, 147, 0.3);
+    padding: 0.6em 1em;
+    border-radius: 8px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.85em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+
+.account-card-copy-button:hover {
+    background: rgba(185, 148, 147, 0.1);
+    border-color: var(--primary-color);
+    transform: scale(1.02);
+}
+
+/* 카카오페이 버튼 */
+.account-kakaopay-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5em;
+    padding: 1em 1.2em;
+    background: #FEE500;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.account-kakaopay-button:hover {
+    background: #FDD800;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.kakaopay-button-text {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.95em;
+    font-weight: 700;
+    color: #3C1E1E;
+    flex: 1;
+    text-align: left;
+}
+
+.kakaopay-button-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* 토스트 메시지 */
+.account-toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 1em 2em;
+    border-radius: 25px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    z-index: 10000;
+    display: none;
+    animation: toastFadeIn 0.3s ease-out;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes toastFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .account-trapezoid {
+        padding: 3em 1.5em;
+    }
+
+    .account-title {
+        font-size: 1.2rem;
+        margin-bottom: 1.5em;
+    }
+
+    .account-accordion-button {
+        padding: 1em 1.2em;
+        font-size: 1em;
+    }
+
+    .account-accordion-button .accordion-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .account-card {
+        padding: 1.2em;
+    }
+
+    .account-card-name {
+        font-size: 1.2em;
+    }
+
+    .account-card-bank-name {
+        font-size: 0.8em;
+    }
+
+    .account-card-number {
+        font-size: 0.85em;
+    }
+
+    .account-card-copy-button {
+        padding: 0.5em 0.8em;
+        font-size: 0.8em;
+    }
+
+    .kakaopay-button-text {
+        font-size: 0.9em;
+    }
+
+    .kakaopay-button-icon {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .account-trapezoid {
+        padding: 2em 1em;
+    }
+
+    .account-title {
+        font-size: 1.1rem;
+    }
+
+    .account-accordion-button {
+        padding: 0.9em 1em;
+        font-size: 0.95em;
+    }
+
+    .account-card {
+        padding: 1em;
+    }
+
+    .account-card-name {
+        font-size: 1.1em;
+    }
+
+    .account-card-bank-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.6em;
+    }
+
+    .account-card-copy-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .kakaopay-button-text {
+        font-size: 0.85em;
+    }
+
+    .kakaopay-button-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .account-kakaopay-button {
+        padding: 0.9em 1em;
+    }
+}

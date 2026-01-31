@@ -1,0 +1,99 @@
+/* 편지 섹션 */
+.letter {
+    padding: 4.5em 3.5em 3em 3.5em;
+    background: var(--white);
+}
+
+.letter .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.2em;
+}
+
+.header-deco {
+    width: 12em;
+    margin-bottom: 0.8em;
+}
+
+.letter .title {
+    color: var(--primary-color);
+    letter-spacing: 1px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.4em;
+}
+
+.letter .sub-title {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.invitation-header {
+    font-family: 'Spectral', serif;
+    font-size: 2rem;
+    color: #6F6F6F;
+    text-align: center;
+    margin: 0.3em 0 0.5em 0;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.letter .letter {
+    text-align: center;
+    line-height: 2.2em;
+    font-size: 1rem;
+}
+
+.letter-bottom {
+    max-width: var(--content-max-width);
+    width: 100%;
+    margin: 0 auto;
+}
+
+.family-description {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.groom-line, .bride-line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5em;
+    gap: 0.2em;
+    color: var(--font-color-default);
+    font-size: 1.1em;
+}
+
+.name-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.5em;
+}
+
+.groom-name, .bride-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-left: 1.0em; /* 출생순서와 이름 사이 간격 추가 */
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .letter {
+        padding: 3em 2em;
+    }
+
+    .invitation-header {
+        font-size: 1.6rem;
+        margin: 0.3em 0 0.5em 0;
+    }
+}

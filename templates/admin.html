@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지 - {{ config.wedding.groom.name_kr }} ♥ {{ config.wedding.bride.name_kr }}</title>
+    <link rel="icon" type="image/png" href="/static/assets/images/favicon.webp">
+    <link rel="stylesheet" href="/static/css/admin.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- 헤더 -->
+        <header class="admin-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>💐 관리자 페이지</h1>
+                    <span class="admin-badge">{{ admin_user }}</span>
+                </div>
+                <div class="header-right">
+                    <a href="/" class="btn-secondary" target="_blank">
+                        <i data-lucide="external-link"></i>
+                        청첩장 보기
+                    </a>
+                    <button onclick="logout()" class="btn-danger">
+                        <i data-lucide="log-out"></i>
+                        로그아웃
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 대시보드 통계 -->
+        <section class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-icon rsvp-icon">
+                    <i data-lucide="users"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">RSVP 응답</div>
+                    <div class="stat-value" id="total-rsvp">-</div>
+                    <div class="stat-detail" id="rsvp-detail">로딩중...</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon guestbook-icon">
+                    <i data-lucide="message-square"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">방명록 메시지</div>
+                    <div class="stat-value" id="total-guestbook">-</div>
+                    <div class="stat-detail">소중한 축하 메시지</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon attendance-icon">
+                    <i data-lucide="check-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">참석 예정</div>
+                    <div class="stat-value" id="attending-count">-</div>
+                    <div class="stat-detail" id="attendance-detail">참석 / 불참</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 탭 네비게이션 -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="switchTab('rsvp')">
+                <i data-lucide="calendar-check"></i>
+                RSVP 관리
+                <span class="tab-count" id="tab-rsvp-count">0</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('guestbook')">
+                <i data-lucide="book-open"></i>
+                방명록 관리
+                <span class="tab-count" id="tab-guestbook-count">0</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('photos')">
+                <i data-lucide="image"></i>
+                사진 관리
+                <span class="tab-count" id="tab-photos-count">0</span>
+            </button>
+        </div>
+
+        <!-- RSVP 탭 -->
+        <section id="rsvp-tab" class="tab-content active">
+            <div class="content-header">
+                <h2>
+                    <i data-lucide="calendar-check"></i>
+                    RSVP 응답 관리
+                </h2>
+                <div class="content-actions">
+                    <button onclick="exportRSVP()" class="btn-secondary">
+                        <i data-lucide="download"></i>
+                        CSV 다운로드
+                    </button>
+                    <button onclick="refreshRSVP()" class="btn-primary">
+                        <i data-lucide="refresh-cw"></i>
+                        새로고침
+                    </button>
+                </div>
+            </div>
+
+            <!-- 필터 -->
+            <div class="filter-bar">
+                <select id="rsvp-filter" onchange="filterRSVP()">
+                    <option value="all">전체 보기</option>
+                    <option value="참석할게요">참석할게요</option>
+                    <option value="참석이 어려워요">참석이 어려워요</option>
+                    <option value="고민중이에요">고민중이에요</option>
+                </select>
+                <select id="side-filter" onchange="filterRSVP()">
+                    <option value="all">신랑측/신부측 전체</option>
+                    <option value="신랑측">신랑측</option>
+                    <option value="신부측">신부측</option>
+                </select>
+                <input type="text" id="rsvp-search" placeholder="이름 또는 연락처 검색..." onkeyup="filterRSVP()">
+            </div>
+
+            <!-- RSVP 테이블 -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th width="4%">No.</th>
+                            <th width="8%">구분</th>
+                            <th width="10%">참석여부</th>
+                            <th width="15%">이름</th>
+                            <th width="8%">동행인원</th>
+                            <th width="10%">식사여부</th>
+                            <th width="20%">연락처</th>
+                            <th width="15%">응답일시</th>
+                            <th width="10%">삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rsvp-table-body">
+                        <tr>
+                            <td colspan="9" class="loading-cell">
+                                <div class="loading-spinner"></div>
+                                <p>데이터를 불러오는 중...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="rsvp-empty" class="empty-state" style="display: none;">
+                <i data-lucide="inbox"></i>
+                <p>아직 RSVP 응답이 없습니다.</p>
+            </div>
+        </section>
+
+        <!-- 방명록 탭 -->
+        <section id="guestbook-tab" class="tab-content">
+            <div class="content-header">
+                <h2>
+                    <i data-lucide="book-open"></i>
+                    방명록 관리
+                </h2>
+                <div class="content-actions">
+                    <button onclick="exportGuestbook()" class="btn-secondary">
+                        <i data-lucide="download"></i>
+                        CSV 다운로드
+                    </button>
+                    <button onclick="refreshGuestbook()" class="btn-primary">
+                        <i data-lucide="refresh-cw"></i>
+                        새로고침
+                    </button>
+                </div>
+            </div>
+
+            <!-- 검색 -->
+            <div class="filter-bar">
+                <input type="text" id="guestbook-search" placeholder="이름 또는 메시지 검색..." onkeyup="filterGuestbook()">
+            </div>
+
+            <!-- 방명록 테이블 -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th width="5%">No.</th>
+                            <th width="15%">이름</th>
+                            <th width="50%">메시지</th>
+                            <th width="20%">작성일시</th>
+                            <th width="10%">삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody id="guestbook-table-body">
+                        <tr>
+                            <td colspan="5" class="loading-cell">
+                                <div class="loading-spinner"></div>
+                                <p>데이터를 불러오는 중...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="guestbook-empty" class="empty-state" style="display: none;">
+                <i data-lucide="inbox"></i>
+                <p>아직 방명록 메시지가 없습니다.</p>
+            </div>
+        </section>
+
+        <!-- 사진 탭 -->
+        <section id="photos-tab" class="tab-content">
+            <div class="content-header">
+                <h2>
+                    <i data-lucide="image"></i>
+                    업로드된 사진 관리
+                </h2>
+                <div class="content-actions">
+                    <button onclick="downloadAllPhotos()" class="btn-secondary">
+                        <i data-lucide="download"></i>
+                        전체 다운로드
+                    </button>
+                    <button onclick="refreshPhotos()" class="btn-primary">
+                        <i data-lucide="refresh-cw"></i>
+                        새로고침
+                    </button>
+                </div>
+            </div>
+
+            <!-- 통계 -->
+            <div class="photos-stats">
+                <div class="stat-item">
+                    <span class="stat-label">총 사진 수:</span>
+                    <span class="stat-value" id="photos-total">0</span>장
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">총 용량:</span>
+                    <span class="stat-value" id="photos-size">0</span>MB
+                </div>
+            </div>
+
+            <!-- 사진 그리드 -->
+            <div id="photos-grid" class="photos-grid">
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p>사진을 불러오는 중...</p>
+                </div>
+            </div>
+
+            <div id="photos-empty" class="empty-state" style="display: none;">
+                <i data-lucide="image"></i>
+                <p>아직 업로드된 사진이 없습니다.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- 삭제 확인 모달 -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <i data-lucide="alert-triangle"></i>
+                    삭제 확인
+                </h3>
+            </div>
+            <div class="modal-body">
+                <p id="delete-message">정말 삭제하시겠습니까?</p>
+                <p class="warning-text">⚠️ 이 작업은 되돌릴 수 없습니다.</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeDeleteModal()" class="btn-secondary">취소</button>
+                <button onclick="confirmDelete()" class="btn-danger">삭제</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 토스트 알림 -->
+    <div id="toast" class="toast">
+        <span id="toast-message"></span>
+    </div>
+
+    <script src="/static/js/admin.js"></script>
+    <script>
+        // Lucide 아이콘 초기화
+        lucide.createIcons();
+    </script>
+</body>
+</html>

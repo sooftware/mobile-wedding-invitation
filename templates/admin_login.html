@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 로그인</title>
+    <link rel="icon" type="image/png" href="/static/assets/images/favicon.webp">
+    <link rel="stylesheet" href="/static/css/admin.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="login-page">
+<div class="login-container">
+    <div class="login-box">
+        <div class="login-header">
+            <div class="login-icon">
+                <i data-lucide="shield-check"></i>
+            </div>
+            <h1>관리자 로그인</h1>
+            <p>청첩장 관리 페이지에 오신 것을 환영합니다</p>
+        </div>
+
+        <form id="login-form" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="username">
+                    <i data-lucide="user"></i>
+                    사용자명
+                </label>
+                <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="사용자명을 입력하세요"
+                        required
+                        autocomplete="username"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">
+                    <i data-lucide="lock"></i>
+                    비밀번호
+                </label>
+                <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="비밀번호를 입력하세요"
+                        required
+                        autocomplete="current-password"
+                >
+            </div>
+
+            <div id="error-message" class="error-message" style="display: none;"></div>
+
+            <button type="submit" class="btn-login" id="login-btn">
+                <i data-lucide="log-in"></i>
+                로그인
+            </button>
+        </form>
+
+        <div class="login-footer">
+            <a href="/" class="back-link">
+                <i data-lucide="arrow-left"></i>
+                청첩장으로 돌아가기
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    lucide.createIcons();
+
+    async function handleLogin(event) {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('error-message');
+        const loginBtn = document.getElementById('login-btn');
+
+        // 버튼 비활성화
+        loginBtn.disabled = true;
+        loginBtn.innerHTML = '<i data-lucide="loader-2"></i> 로그인 중...';
+        lucide.createIcons();
+
+        // 에러 메시지 숨기기
+        errorMessage.style.display = 'none';
+
+        try {
+            const response = await fetch('/admin/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    username: username,
+                    password: password
+                })
+            });
+
+            if (response.ok) {
+                // 로그인 성공 - 관리자 페이지로 리다이렉트
+                window.location.href = '/admin';
+            } else {
+                // 로그인 실패
+                const data = await response.json();
+                errorMessage.textContent = data.detail || '로그인에 실패했습니다.';
+                errorMessage.style.display = 'block';
+
+                // 비밀번호 필드 초기화
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        } catch (error) {
+            console.error('로그인 에러:', error);
+            errorMessage.textContent = '서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+            errorMessage.style.display = 'block';
+        } finally {
+            // 버튼 활성화
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = '<i data-lucide="log-in"></i> 로그인';
+            lucide.createIcons();
+        }
+    }
+</script>
+</body>
+</html>

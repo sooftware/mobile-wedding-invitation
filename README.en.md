@@ -1,4 +1,4 @@
-[English](./README.en.md) | **한국어**
+**English** | [한국어](./README.md)
 
 # <img src="static/assets/images/favicon.webp" width="25"/> Mobile Wedding Invitation (w/ AI Chatbot)
 
@@ -7,56 +7,59 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com/)
 [![LangChain](https://img.shields.io/badge/LangChain-latest-orange.svg)](https://www.langchain.com/)
 
-직접 제작한 모바일 결혼식 청첩장 어플리케이션입니다.    
-AI 챗봇, 방명록, RSVP, 사진 업로드, 관리자 페이지 등의 기능을 제공합니다.  
-상업적인 용도 외에 개인 청첩장으로는 자유롭게 사용하셔도 됩니다. 🤗
+https://github.com/user-attachments/assets/05eb2772-9dc3-4b66-af2c-09c4497946cf
+
+> 🤖 Modern mobile wedding invitation web application with AI chatbot
+
+A self-made mobile wedding invitation application. 🤗
+Provides various features including AI chatbot, guestbook, RSVP, and admin dashboard to communicate with guests and efficiently manage wedding preparations.
 
 ## ✨ Key Features
 
-### 🎞️  Opening Animation  
-  
+### 🎞️  Opening Animation
+
 | Animation                                  |
 |--------------------------------------------|
 | <img src="assets/opening.gif" width="200"> |
 
-페이지 접속 시 재생되는 애니메이션. 지정된 사진과 문구가 나타납니다.  
+An animation that plays when accessing the page. Displays designated photos and text.
 
 
 ### 🤖 AI Chatbot (LangGraph-based)
-   
+
 | Example1                                            | Example2                                            |
 |-----------------------------------------------------|-----------------------------------------------------|
 | <img src="assets/chatbot1.png" width="225"> | <img src="assets/chatbot2.png" width="225"> |
-   
-신랑신부에 대한 질문에 자연스럽게 답변하는 RAG 기반 챗봇.  
+
+RAG-based chatbot that naturally answers questions about the bride and groom.
 
 ### 📝 Guestbook & RSVP
-  
-| 방명록                                          | 방명록 작성 페이지                                         | RSVP                                    | RSVP                                    | 
+
+| Guestbook                                    | Write Page                                         | RSVP                                    | RSVP                                    |
 |----------------------------------------------|----------------------------------------------------|------------------------------------------|------------------------------------------|
 | <img src="assets/guestbook.png" width="150"> | <img src="assets/guestbook_write_page.png" width="150"> | <img src="assets/rsvp1.png" width="150"> | <img src="assets/rsvp2.png" width="150"> |
-  
-실시간 축하 메시지 작성/수정/삭제, 참석 여부 확인 및 통계. 비밀번호 보호, 신랑/신부측 구분.
+
+Real-time creation/editing/deletion of congratulatory messages, attendance confirmation and statistics. Password protection, bride/groom side distinction.
 
 ### 📸  Photo Gallery & Upload
 
-| 사진 업로드 페이지                               | 사진 업로드 성공 페이지                                   |
+| Photo Upload Page                        | Upload Success Page                                   |
 |------------------------------------------|-------------------------------------------------|
 | <img src="assets/snaps.png" width="150"> | <img src="assets/snaps_upload.png" width="150"> |
 
-AWS S3를 이용한 사진 업로드 기능. 하객들이 결혼식 사진을 쉽게 공유할 수 있는 기능.
+Photo upload functionality using AWS S3. Allows guests to easily share wedding photos.
 
 ### 👨‍💼 Admin Page
-  
+
 | Admin Login                              | Admin Page                                |
 |------------------------------------------|-------------------------------------------|
 | <img src="assets/admin.png" width="150"> | <img src="assets/admin2.png" width="300"> |
-  
-세션 기반 인증, RSVP 및 방명록 통합 관리, CSV 내보내기, 실시간 통계.
+
+Session-based authentication, integrated RSVP and guestbook management, CSV export, real-time statistics.
 
 ### 🎨 Etc. Features
-🗺️ 지도 & 교통편 | 💰 카카오페이 송금 | 📅 구글 캘린더 연동  
-🎵 배경음악  | 📱 카카오톡 공유 | 📊 방문자 통계
+🗺️ Map & Transportation | 💰 KakaoPay Transfer | 📅 Google Calendar Integration
+🎵 Background Music | 📱 KakaoTalk Sharing | 📊 Visitor Statistics
 
 ---
 
@@ -64,44 +67,44 @@ AWS S3를 이용한 사진 업로드 기능. 하객들이 결혼식 사진을 �
 
 ### Pre-requisites
 - Python 3.10+
-- OpenAI API 키 (AI 챗봇용)
-- AWS 계정 및 S3 버킷 (사진 업로드 기능용)
-- (프로덕션) PostgreSQL 또는 Railway 계정
+- OpenAI API key (for AI chatbot)
+- AWS account and S3 bucket (for photo upload feature)
+- (Production) PostgreSQL or Railway account
 
 ### Setup
 
-**1️⃣ 프로젝트 클론 및 설치**
+**1️⃣ Clone and install**
 ```bash
 git clone https://github.com/sooftware/wedding-invitation.git
 cd wedding-invitation
 pip install -r requirements.txt
 ```
 
-**2️⃣ 환경변수 설정**
+**2️⃣ Configure environment variables**
 ```bash
 cp .env.example .env
-# OpenAI API 키와 관리자 비밀번호 설정
+# Set OpenAI API key and admin password
 ```
 
-**3️⃣ 실행**
+**3️⃣ Run**
 ```bash
 python main.py
-# http://localhost:8000 접속
+# Access http://localhost:8000
 ```
 
 ### Deployment
 
-> 📖 **자세한 가이드**: [설치 가이드](docs/INSTALLATION.ko.md) | [Railway 배포 가이드](docs/DEPLOYMENT.ko.md)
+> 📖 **Detailed guides**: [Installation Guide](docs/INSTALLATION.md) | [Railway Deployment Guide](docs/DEPLOYMENT.md)
 
 ---
 
 ## 📚 Documentation
 
-| 카테고리 | 문서 |
+| Category | Documents |
 |---------|------|
-| **시작하기** | [설치 가이드](docs/INSTALLATION.ko.md) · [Railway 배포](docs/DEPLOYMENT.ko.md) |
-| **설정** | [config.json 설정](docs/CONFIGURATION.ko.md) · [AI 챗봇 설정](docs/CHATBOT.ko.md) · [디자인 커스터마이징](docs/CUSTOMIZATION.ko.md) |
-| **도움말** | [FAQ (자주 묻는 질문)](docs/FAQ.ko.md) |
+| **Getting Started** | [Installation Guide](docs/INSTALLATION.md) · [Railway Deployment](docs/DEPLOYMENT.md) |
+| **Configuration** | [config.json Setup](docs/CONFIGURATION.md) · [AI Chatbot Setup](docs/CHATBOT.md) · [Design Customization](docs/CUSTOMIZATION.md) |
+| **Help** | [FAQ](docs/FAQ.md) |
 
 ---
 
@@ -123,29 +126,29 @@ python main.py
 
 ```
 wedding-invitation/
-├── app/                    # 백엔드 (FastAPI, LangGraph 챗봇, DB)
-├── config/                 # 설정 (결혼 정보, 챗봇 지식베이스)
-├── static/                 # 정적 파일 (CSS, JS, 이미지)
-├── templates/              # HTML 템플릿
-├── scripts/                # 유틸리티 (비밀번호 생성, 이미지 최적화)
-├── docs/                   # 문서
-└── main.py                 # 앱 엔트리포인트
+├── app/                    # Backend (FastAPI, LangGraph chatbot, DB)
+├── config/                 # Configuration (wedding info, chatbot knowledge base)
+├── static/                 # Static files (CSS, JS, images)
+├── templates/              # HTML templates
+├── scripts/                # Utilities (password generation, image optimization)
+├── docs/                   # Documentation
+└── main.py                 # App entry point
 ```
 
-> 📖 자세한 구조는 [아키텍처 문서](docs/ARCHITECTURE.ko.md) 참고
+> 📖 See [Architecture Documentation](docs/ARCHITECTURE.md) for detailed structure
 
 ---
 
 ## 📄 License
 
-이 프로젝트는 **CC BY-NC-SA** 라이선스를 따릅니다.
+This project follows the **CC BY-NC-SA** license.
 
--  ✅ 개인 결혼식 사용 가능 
--  ✅ 수정 및 재배포 가능 (단, 동일 라이선스 적용 및 출처 명시)
--  ❌ 상업적 이용 금지
--  ❌ 청첩장 제작 서비스 금지
+-  ✅ Can be used for personal weddings
+-  ✅ Can be modified and redistributed (with same license and attribution)
+-  ❌ Commercial use prohibited
+-  ❌ Wedding invitation service prohibited
 
-자세한 내용은 [LICENSE](./LICENSE) 파일을 확인하세요.
+See [LICENSE](./LICENSE) file for details.
 
 ---
 

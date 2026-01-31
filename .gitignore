@@ -1,3 +1,15 @@
+__pycache__/
+htmlcov/
+htmlcov/*
+*.pyc
+wedding.db
+.DS_Store
+node_modules/
+__pycache__/*
+.idea/*
+
+# 빌드 산출물 (Generated CSS - main.min.css만 사용)
+static/css/main.css
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

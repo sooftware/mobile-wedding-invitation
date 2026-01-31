@@ -1,0 +1,428 @@
+{
+  "wedding": {
+    "groom": {
+      "name_kr": "김수환",
+      "name_en": "Soohwan",
+      "display_name": "수환",
+      "birth_order": "장남",
+      "parents": {
+        "father": "김은희",
+        "mother": "김미자"
+      }
+    },
+    "bride": {
+      "name_kr": "조소영",
+      "name_en": "Soyoung",
+      "display_name": "소영",
+      "birth_order": "장녀",
+      "parents": {
+        "father": "조병의",
+        "mother": "변시내"
+      }
+    },
+    "date": {
+      "year": 2026,
+      "month": 5,
+      "day": 17,
+      "time": "14:00",
+      "day_of_week": "일",
+      "display_time": "오후 2시",
+      "iso_format": "2026-05-17T14:00:00"
+    },
+    "venue": {
+      "name": "양재 라시따시어터 단독홀",
+      "address": "서울특별시 서초구 매헌로 16 1층",
+      "full_address": "서울특별시 서초구 매헌로 16 1"
+    }
+  },
+  "accounts": {
+    "groom": [
+      {
+        "name": "신랑 아버지 성함",
+        "bank": "국민은행",
+        "number": "111111-11-111111",
+        "kakaopay_url": "https://qr.kakaopay.com/FFZ12zLKh"
+      },
+      {
+        "name": "신랑 어머니 성함",
+        "bank": "국민은행",
+        "number": "123456-01-123456",
+        "kakaopay_url": "https://qr.kakaopay.com/FFZ12zLKh"
+      },
+      {
+        "name": "신랑 이름",
+        "bank": "카카오뱅크",
+        "number": "3333-06-1234567",
+        "kakaopay_url": "https://qr.kakaopay.com/FFZ12zLKh"
+      }
+    ],
+    "bride": [
+      {
+        "name": "신부 아버지 성함",
+        "bank": "농협은행",
+        "number": "132-12-123456",
+        "kakaopay_url": "https://qr.kakaopay.com/FFZ12zLKh"
+      },
+      {
+        "name": "신부 어머니 성함",
+        "bank": "신한은행",
+        "number": "123-123-123456",
+        "kakaopay_url": "https://qr.kakaopay.com/FFZ12zLKh"
+      },
+      {
+        "name": "신부 이름",
+        "bank": "국민은행",
+        "number": "123456-12-123456",
+        "kakaopay_url": "https://qr.kakaopay.com/FFZ12zLKh"
+      }
+    ]
+  },
+  "qna": [
+    {
+      "id": 1,
+      "question": "결혼식은 언제, 어디서 하나요?",
+      "answer": "2026년 5월 17일 (일) 오후 2시에 라시따시어터에서 진행됩니다.<br>주소: 서울특별시 서초구 매헌로 16 1층"
+    },
+    {
+      "id": 2,
+      "question": "주차가 가능한가요?",
+      "answer": "네, 라시따시어터 건물 내 주차장을 이용하실 수 있습니다.<br>주차장 인포데스크에서 차량번호를 등록해주세요."
+    },
+    {
+      "id": 3,
+      "question": "대중교통으로 어떻게 가나요?",
+      "answer": "신분당선 양재시민의숲역 5번 출구에서 셔틀버스가 운영됩니다.<br>자세한 교통편은 아래 '교통 수단' 섹션을 참고해주세요."
+    },
+    {
+      "id": 4,
+      "question": "식사는 제공되나요?",
+      "answer": "네, 결혼식 후 피로연에서 식사가 제공됩니다.<br>식이 진행되는 홀 같은 층에 뷔페 형식으로 준비되어 있습니다."
+    }
+  ],
+  "content": {
+    "page_title": "김수환 ♥ 조소영의 결혼식에 초대합니다",
+    "meta": {
+      "title": "수환 ♥ 소영의 결혼식",
+      "description": "2026년 5월 17일 (일) 오후 2시, 라시따시어터에서 진행됩니다",
+      "image": "https://sooftware.s3.ap-northeast-2.amazonaws.com/etc/cover.webp"
+    },
+    "intro_animation": {
+      "scene1": {
+        "main_text": "Soohwan & Soyoung's Wedding Day",
+        "bottom_left": "WEDDING",
+        "bottom_right": "INVITATION"
+      }
+    },
+    "countdown": {
+      "labels": {
+        "days": "DAYS",
+        "hour": "HOUR",
+        "min": "MIN",
+        "sec": "SEC"
+      },
+      "message": "수환 ♥ 소영의 결혼식이 {days}일 남았습니다"
+    },
+    "buttons": {
+      "google_calendar": "Google Calendar에 추가",
+      "photo_upload": "사진 업로드",
+      "write_message": "작성하기",
+      "kakao_share": "카카오톡으로 초대장 보내기",
+      "copy": "복사",
+      "confirm": "확인",
+      "cancel": "취소",
+      "delete": "삭제",
+      "save": "저장",
+      "submit": "제출하기",
+      "write_complete": "작성 완료"
+    },
+    "image_share": {
+      "message": "저희의 새로운 시작을<br>함께 해주셔서 감사합니다."
+    },
+    "letter": {
+      "title": "두 사람의 결혼식에 초대합니다.",
+      "header": "I N V I T A T I O N",
+      "content": "함께 맞이하는 여덟 번째 봄,<br>저희 두 사람 평생을 약속하려 합니다.<br><br>서로를 있는 모습 그대로 아끼며<br>평생을 좋은 친구이자 사랑하는 연인으로 함께하겠습니다.<br><br>저희가 함께 나아갈 첫걸음에<br>따뜻한 축복 나눠주시면 감사하겠습니다."
+    },
+    "contact_section": {
+      "title": "연락처",
+      "subtitle": "궁금한 점이 있으시면 언제든지 연락주세요",
+      "groom_title": "신랑",
+      "bride_title": "신부",
+      "groom_contact_title": "신랑 측 혼주",
+      "bride_contact_title": "신부 측 혼주",
+      "father_label": "아버지",
+      "mother_label": "어머니"
+    },
+    "d_day": {
+      "prefix": "수환",
+      "suffix": "소영의 결혼식이",
+      "symbol": "♥︎"
+    },
+    "rsvp": {
+      "title": "RSVP",
+      "subtitle": "참석 의사를 전해주세요",
+      "button_text": "참석 의사 전달하기"
+    },
+    "gallery": {
+      "title": "웨딩 갤러리",
+      "subtitle_en": "GALLERY",
+      "subtitle": "사진을 클릭하면 더 크게 볼 수 있습니다",
+      "total_photos": 27,
+      "nav_buttons": {
+        "prev_aria": "이전 사진",
+        "next_aria": "다음 사진"
+      }
+    },
+    "video_section": {
+      "subtitle_en": "OUR STORY",
+      "title": "우리의 이야기",
+      "subtitle": "두 사람의 소중한 순간들"
+    },
+    "qna_section": {
+      "subtitle_en": "FAQ",
+      "title": "자주 묻는 질문",
+      "subtitle": "궁금한 점들을 모아봤어요"
+    },
+    "account_section": {
+      "subtitle_en": "ACCOUNT",
+      "title": "마음 전하기",
+      "groom_button": "신랑 측 계좌번호",
+      "bride_button": "신부 측 계좌번호",
+      "modal_title_groom": "신랑 측 계좌번호",
+      "modal_title_bride": "신부 측 계좌번호",
+      "copy_button_text": "복사하기",
+      "kakaopay_button_text": "카카오톡 송금",
+      "kakaopay_alt_text": "카카오톡 송금",
+      "copy_success_message": "계좌번호가 복사되었습니다! 💰",
+      "copy_error_message": "복사에 실패했습니다. 다시 시도해주세요."
+    },
+    "location": {
+      "subtitle_en": "INFORMATION",
+      "title": "예식정보 및 안내 사항",
+      "tabs": {
+        "photobooth": "포토 부스",
+        "dining": "식사 안내",
+        "transport": "교통 수단"
+      },
+      "photobooth_content": {
+        "text": "포토부스가 설치될 예정입니다.<br>귀한 발걸음 해주신 여러분의<br>환한 미소 남겨주시면 소중히 간직하겠습니다."
+      },
+      "dining_content": {
+        "text": "예식창과 연회장은 모두 1층에 있습니다.<br>뷔페 형식으로, 120여가지 이상의 다양한 메뉴가 준비되어 있습니다.<br>음료 및 주류는 무제한으로 제공됩니다.<br><br>* 예식 시작 30분 전부터 연회장 입장 가능"
+      },
+      "copy_address_text": "클릭하면 주소가 복사됩니다",
+      "map_click_hint": "클릭하면 크게 볼 수 있습니다",
+      "map_lightbox_info": "찾아오는 길",
+      "map_buttons": {
+        "naver": "네이버맵",
+        "kakao": "카카오맵",
+        "tmap": "티맵"
+      }
+    },
+    "guestbook": {
+      "subtitle_en": "GUESTBOOK",
+      "title": "방명록",
+      "subtitle": "신랑신부에게 따뜻한 축하 메시지를 남겨주세요",
+      "preview_text": "여러분의 소중한 축하 메시지를<br>방명록에 남겨주세요",
+      "button_text": "축하 메세지 작성하기",
+      "messages_title": "축하 메시지",
+      "empty_message": "아직 남겨진 메시지가 없습니다",
+      "empty_subtitle": "첫 번째 축하 메시지를 남겨보세요!",
+      "loading_message": "메시지를 불러오는 중..."
+    },
+    "snaps": {
+      "subtitle_en": "CAPTURE OUR MOMENTS",
+      "title": "Snaps",
+      "description": [
+        "신랑신부의 행복한 순간을 담아주세요.",
+        "예식 당일, 아래 버튼을 통해 사진을 올려주세요.",
+        "많은 참여 부탁드려요!"
+      ],
+      "upload_button": "사진 업로드",
+      "upload_modal": {
+        "title": "사진 업로드 중...",
+        "preparing": "업로드 준비 중...",
+        "close_button": "확인"
+      }
+    },
+    "share": {
+      "title": "공유하기",
+      "subtitle": "소중한 분들과 함께 저희의 특별한 날을 공유해주세요",
+      "message": "소중한 분들과 함께 저희의 특별한 날을<br>공유해주세요 💕",
+      "buttons": {
+        "kakao": "카카오톡 공유",
+        "link": "링크 복사",
+        "native": "공유하기"
+      },
+      "kakao_share": {
+        "title": "💒 수환 ♥ 소영의 결혼식",
+        "description": "2026년 5월 17일 (일) 오후 2시\n라시따시어터에서 진행됩니다.\n\n소중한 분을 모시고 참석해주시면 감사하겠습니다.",
+        "button_title": "청첩장 보기"
+      }
+    },
+    "footer": {
+      "signature": "Copyright 2025. Soohwan & Soyoung All rights reserved.",
+      "github_url": "https://github.com/sooftware"
+    },
+    "chatbot": {
+      "subtitle_en": "AI CHATBOT",
+      "name": "수환 & 소영 💕",
+      "title": "궁금한 것이 있으신가요?",
+      "subtitle": "저희와 결혼식에 대해 궁금한 것이 있으시면 언제든 물어보세요! 💕",
+      "placeholder": "예: 두 분은 어떻게 만나셨나요?",
+      "status_online": "온라인",
+      "submit_button": "질문하기",
+      "fallback_message": "죄송해요 😅 해당 질문에 대한 정보가 없네요 😢 다른 궁금한 것이 있으시면 언제든 물어보세요!",
+      "error_message": "앗! 잠시 문제가 생겼네요 😅 조금 후에 다시 시도해주세요!",
+      "thinking_message": "생각하고 있어요... 🤔",
+      "profile_image": "/static/assets/images/chatbot-profile.webp",
+      "welcome": {
+        "greeting": "안녕하세요! 저희 커플에게 궁금한 걸 물어보세요! 😊",
+        "suggested_questions": [
+          "두 분은 어떻게 만나셨나요?",
+          "신혼여행은 어디로 가나요?",
+          "식사는 어떻게 되나요?",
+          "결혼식에서 찍은 사진은 어떻게 공유하면 되나요?"
+        ]
+      }
+    },
+    "bgm": {
+      "notification": "배경음악이 준비되었습니다"
+    },
+    "modals": {
+      "edit_message": {
+        "title": "메시지 수정",
+        "password_prompt": "작성할 때 입력한 비밀번호를 입력해주세요.",
+        "password_placeholder": "비밀번호 입력",
+        "name_label": "이름",
+        "name_placeholder": "이름을 입력해주세요",
+        "message_label": "메시지",
+        "message_placeholder": "수정할 메시지를 입력해주세요"
+      },
+      "delete_message": {
+        "title": "메시지 삭제",
+        "password_prompt": "작성할 때 입력한 비밀번호를 입력해주세요.",
+        "password_placeholder": "비밀번호 입력"
+      },
+      "guestbook": {
+        "title": "축하 메시지",
+        "subtitle": "따뜻한 축하의 말씀을<br>남겨주세요 💝",
+        "name_label": "성함",
+        "name_placeholder": "성함을 입력해주세요",
+        "message_label": "축하 메시지",
+        "message_placeholder": "축하 메시지를 입력해주세요",
+        "char_counter": "/ 500",
+        "password_label": "비밀번호",
+        "password_placeholder": "수정/삭제 시 필요 (4자 이상)",
+        "password_hint": "메시지 수정 및 삭제 시 사용됩니다"
+      },
+      "rsvp": {
+        "title": "참석 의사 전달",
+        "can_attend_label": "참석하실 수 있나요?",
+        "can_attend_options": {
+          "yes": "참석할게요",
+          "no": "참석이 어려워요"
+        },
+        "which_side_label": "어느 분의 하객이신가요?",
+        "which_side_options": {
+          "groom": "신랑측",
+          "bride": "신부측"
+        },
+        "guest_name_label": "성함",
+        "guest_name_placeholder": "(필수) 대표자 한 분의 성함을 입력해 주세요.",
+        "companion_extra_label": "추가인원",
+        "companion_extra_prefix": "외",
+        "companion_extra_suffix": "명",
+        "meal_attendance_label": "식사여부",
+        "meal_attendance_options": {
+          "yes": "식사함",
+          "no": "식사안함",
+          "yes_value": "식사 참석",
+          "no_value": "식사 불참"
+        },
+        "privacy_title": "개인정보 수집 및 이용 동의(필수)",
+        "privacy_description": "참석여부 전달을 위한 개인정보 수집 및 이용에 동의해주세요.<br>항목: 성함, 연락처, 동행인 수",
+        "privacy_agree": "동의합니다.",
+        "phone_label": "연락처 끝자리 (선택)",
+        "phone_placeholder": "연락처 끝 4자리 (선택)"
+      },
+      "attendance_notice": {
+        "title": "참석 의사 전달",
+        "description": "특별한 날 축하의 마음으로 참석해주시는<br>모든 분들을 한 분 한 분<br>더욱 귀하게 모실 수 있도록,<br>아래 버튼으로 신랑 & 신부에게<br>꼭 참석여부 전달을 부탁드립니다.",
+        "buttons": {
+          "rsvp": "참석 의사 전달하기",
+          "hide_today": "오늘 하루 보지 않기"
+        }
+      }
+    },
+    "footer": {
+      "visitor_stats": {
+        "today": "TODAY",
+        "total": "TOTAL"
+      }
+    }
+  },
+  "form_content": {
+    "guestbook": {
+      "title": "방명록",
+      "subtitle": "소중한 축하 메시지를 남겨주세요<br>여러분의 따뜻한 마음이 큰 힘이 됩니다",
+      "example_title": "💌 메시지 예시",
+      "examples": [
+        "결혼을 진심으로 축하드려요! 행복한 가정 꾸리세요",
+        "두 분 정말 잘 어울리세요! 평생 지금처럼 사랑하며 살아가길 바라요",
+        "오늘보다 내일이, 내일보다 모레가 더 행복하길 바랍니다",
+        "새로운 시작을 축하하며, 앞으로도 서로 아끼며 살아가세요"
+      ],
+      "form": {
+        "name_label": "성함",
+        "name_placeholder": "성함을 입력해주세요",
+        "message_label": "축하 메시지",
+        "message_placeholder": "신랑신부에게 전하고 싶은 따뜻한 메시지를 남겨주세요...",
+        "submit_button": "축하 메시지 전송",
+        "back_link": "← 메인 페이지로 돌아가기"
+      },
+      "thanks": {
+        "title": "축하 메시지가 전달되었습니다!",
+        "message": "소중한 축하 메시지를 보내주셔서 감사합니다.<br>신랑신부가 감사히 읽어보겠습니다.",
+        "preview": "여러분의 따뜻한 마음이<br>저희에게 큰 힘과 기쁨이 됩니다. 💕"
+      }
+    },
+    "rsvp": {
+      "title": "참석 의사 전달하기",
+      "subtitle": "한 분 한 분을 소중히 모실 수 있도록 참석 의사를 전해주시면<br>감사하겠습니다.",
+      "form": {
+        "which_side_label": "어느 분의 하객이신가요?",
+        "which_side_options": ["신랑", "신부"],
+        "can_attend_label": "참석하실 수 있나요?",
+        "can_attend_options": ["참석할게요", "참석이 어려워요"],
+        "guest_name_label": "성함이 어떻게 되시나요?",
+        "guest_name_placeholder": "참석자 본인 성함",
+        "phone_label": "동명이인 체크를 위한 번호를 알려주세요",
+        "phone_placeholder": "핸드폰 번호 뒤 4자리",
+        "submit_button": "참석 의사 전달하기",
+        "back_link": "← 메인 페이지로 돌아가기"
+      },
+      "thanks": {
+        "title": "참석 의사가 전달되었습니다!",
+        "message": "소중한 응답 감사합니다. 💕<br>신랑신부가 감사히 확인하겠습니다.",
+        "preview": "여러분의 따뜻한 마음이<br>저희에게 큰 힘과 기쁨이 됩니다. 💕"
+      }
+    }
+  },
+  "external_links": {
+    "maps": {
+      "naver": "https://naver.me/xAFClJVG",
+      "kakao": "https://kko.kakao.com/Eo2w9mM40X",
+      "tmap": "https://tmap.life/1306a1ab"
+    }
+  },
+  "assets": {
+    "background_music": "/static/assets/audio/wedding-music.mp3",
+    "cover_image": "/static/assets/images/cover.webp",
+    "gallery_path": "/static/assets/images/wedding-snaps/",
+    "map_image": "/static/assets/images/lacitta.webp",
+    "share_background_image": "/static/assets/images/couple-bridge.webp",
+    "kakaopay_icon": "/static/assets/images/payment_icon_yellow_small.webp",
+    "kakaotalk_icon": "/static/assets/images/kakaotalk.webp"
+  }
+}

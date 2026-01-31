@@ -1,0 +1,523 @@
+/* 방명록 섹션 */
+.guestbook-section {
+    padding: 4em 2em;
+    background: var(--white); /* 배경을 흰색으로 변경 */
+    position: relative;
+}
+
+.guestbook-section .header {
+    text-align: center;
+    margin-bottom: 2.5em;
+}
+
+.guestbook-section .title {
+    color: var(--primary-color);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    letter-spacing: 1px;
+}
+
+.guestbook-section .subtitle {
+    color: var(--font-color-light);
+    font-size: 0.9em;
+    font-family: 'Noto Sans KR', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    line-height: 1.4;
+}
+
+.guestbook-preview {
+    background: white;
+    border: 1px solid rgba(185, 148, 147, 0.2);
+    border-radius: 16px;
+    padding: 2.5em;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    margin-bottom: 3em;
+}
+
+.preview-content {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    margin-bottom: 1.5em;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1em;
+}
+
+.preview-text {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #666;
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 2em;
+}
+
+.guestbook-button {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-color-light));
+    color: white;
+    border: none;
+    padding: 1em 2.5em;
+    border-radius: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    margin: 0 auto;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 20px rgba(185, 148, 147, 0.3);
+}
+
+.guestbook-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(185, 148, 147, 0.4);
+}
+
+/* 가로 슬라이드 메시지 목록 */
+.messages-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1.5em;
+    padding: 1em 0;
+    margin-bottom: 2em;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(185, 148, 147, 0.3) transparent;
+}
+
+.messages-list::-webkit-scrollbar {
+    height: 8px;
+}
+
+.messages-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.messages-list::-webkit-scrollbar-thumb {
+    background: rgba(185, 148, 147, 0.3);
+    border-radius: 4px;
+}
+
+.messages-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(185, 148, 147, 0.5);
+}
+
+/* 작성하기 버튼 */
+.write-button {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-color-light));
+    color: white;
+    border: none;
+    padding: 0.8em 1.5em;
+    border-radius: 25px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(185, 148, 147, 0.4);
+    transition: all 0.3s ease;
+    margin: 1em 0 0 auto;
+    display: block;
+}
+
+.write-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(185, 148, 147, 0.6);
+}
+
+.messages-section {
+    background: transparent; /* 배경 투명으로 변경 */
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+}
+
+.messages-header {
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.messages-title {
+    color: var(--primary-color);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.2em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+.loading-state, .empty-state {
+    text-align: center;
+    padding: 3em 2em;
+    color: #666;
+}
+
+.loading-spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(185, 148, 147, 0.3);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1em;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.empty-state p {
+    font-weight: 600;
+    margin-bottom: 0.2em;
+}
+
+.empty-state span {
+    font-size: 0.9em;
+    color: var(--font-color-light);
+}
+
+/* 새로운 방명록 메시지 카드 */
+.message-card {
+    position: relative;
+    background: #FEF7F6;
+    border-radius: 16px;
+    padding: 2em 1.5em 1.5em;
+    font-family: 'Noto Sans KR', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 280px;
+    max-width: 320px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+}
+
+.message-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* 카드 상단 중앙의 꽃 아이콘 */
+.message-card::before {
+    content: '🌸';
+    position: absolute;
+    top: 0.8em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2em;
+}
+
+.message-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-bottom: 0.5em;
+    position: relative;
+    padding-top: 0.5em;
+}
+
+.author-info {
+    display: none;
+}
+
+.author-name {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    color: #888;
+    font-size: 0.85em;
+    text-align: center;
+    margin-top: auto;
+}
+
+.timestamp {
+    font-size: 0.7em;
+    color: var(--font-color-light);
+    opacity: 0.6;
+    text-align: center;
+    margin-top: 0.3em;
+}
+
+/* 메시지 액션 버튼들 */
+.message-actions {
+    display: flex;
+    gap: 0.4em;
+    position: absolute;
+    top: 0.8em;
+    right: 1em;
+}
+
+/* 수정 버튼 */
+.edit-button {
+    background: transparent;
+    color: #999;
+    border: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0.6;
+    padding: 0;
+}
+
+.edit-button:hover {
+    color: #666;
+    transform: scale(1.15);
+    opacity: 1;
+}
+
+/* 삭제 버튼 (X) - 카드 오른쪽 상단 */
+.delete-button {
+    background: transparent;
+    color: #999;
+    border: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: 300;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0.6;
+    padding: 0;
+}
+
+.delete-button:hover {
+    color: #d32f2f;
+    transform: scale(1.15);
+    opacity: 1;
+}
+
+.message-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5em 0;
+}
+
+.message-content p {
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
+    color: black;
+    font-size: 0.95em;
+    margin: 0;
+    word-break: break-word;
+    text-align: left;
+}
+
+/* 카드 하단 중앙의 작성자 표시 */
+.message-card .author-display {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    color: #999;
+    font-size: 0.85em;
+    text-align: center;
+    margin-top: auto;
+    padding-top: 1em;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* 더보기 버튼 */
+.read-more-btn {
+    background: rgba(185, 148, 147, 0.2);
+    color: var(--primary-color);
+    border: 1px solid rgba(185, 148, 147, 0.3);
+    padding: 0.3em 0.8em;
+    border-radius: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.75em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.8em;
+    margin-left: -0.5em;
+    width: fit-content;
+    align-self: flex-start;
+}
+
+.read-more-btn:hover {
+    background: rgba(185, 148, 147, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 비밀번호 모달 */
+.password-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(5px);
+}
+
+.password-modal-content {
+    background: white;
+    padding: 2em;
+    border-radius: 16px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.password-modal h3 {
+    color: var(--primary-color);
+    margin-bottom: 1em;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.password-input {
+    width: 100%;
+    padding: 0.8em;
+    border: 2px solid rgba(185, 148, 147, 0.3);
+    border-radius: 8px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+
+.password-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(185, 148, 147, 0.1);
+}
+
+.password-buttons {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+}
+
+.password-button {
+    padding: 0.8em 1.5em;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.password-button.confirm {
+    background: var(--primary-color);
+    color: white;
+}
+
+.password-button.cancel {
+    background: #ccc;
+    color: #666;
+}
+
+.password-button:hover {
+    transform: translateY(-1px);
+}
+
+/* 글자 수 카운터 */
+.char-counter {
+    text-align: right;
+    font-size: 0.85em;
+    color: var(--font-color-light);
+    margin-top: 0.3em;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.char-counter.warning {
+    color: #ff9800;
+}
+
+.char-counter.error {
+    color: #f44336;
+}
+
+/* 폼 힌트 */
+.form-hint {
+    font-size: 0.8em;
+    color: var(--font-color-light);
+    margin-top: 0.3em;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .guestbook-section {
+        padding: 3em 1.5em;
+    }
+
+    .messages-list {
+        gap: 1em;
+        padding: 1em 0.5em;
+    }
+
+    .message-card {
+        min-width: 260px;
+        max-width: 280px;
+        padding: 1.8em 1.2em 1.2em;
+        min-height: 240px;
+    }
+
+    .message-content p {
+        font-size: 0.9em;
+    }
+
+    .message-card .author-display {
+        font-size: 0.8em;
+    }
+
+    .write-button {
+        margin: 1em auto 0;
+        text-align: center;
+    }
+
+    .password-modal-content {
+        padding: 1.5em;
+        margin: 1em;
+    }
+
+    .password-buttons {
+        flex-direction: column;
+        gap: 0.8em;
+    }
+
+    .password-button {
+        width: 100%;
+    }
+}

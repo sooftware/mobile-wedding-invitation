@@ -1,0 +1,87 @@
+/* 커버 섹션 */
+.cover {
+    position: relative;
+    background-image: url('/static/assets/images/cover.webp');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    overflow: hidden;
+    height: 900px;
+}
+
+.white-gradient-blur {
+    display: none;
+}
+
+.blur-gradient {
+    display: none;
+}
+
+.names-kr-box {
+    position: absolute;
+    top: 3em;
+    right: 4em;
+    z-index: 3;
+    text-align: right;
+}
+
+.names-kr-box .names {
+    color: #fff;
+    display: block;
+    font-size: 1.2rem;
+    letter-spacing: 0.8em;
+    line-height: 2;
+}
+
+.cover-title-container {
+    width: 100%;
+    position: absolute;
+    bottom: 1.5em;
+}
+
+.names-en-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.names-en-box .names {
+    display: block;
+    color: var(--white);
+    word-spacing: 5px;
+    font-size: 2.2rem;
+}
+
+.event-date-and-place-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.event-date-and-time,
+.event-place {
+    display: block;
+    color: var(--white);
+    font-size: 1rem;
+}
+
+.event-date-and-time {
+    margin-bottom: 0.4em;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .cover {
+        height: 100vh;
+    }
+
+    .names-kr-box {
+        top: 2em;
+        right: 2em;
+    }
+
+    .names-en-box .names {
+        font-size: 1.8rem;
+    }
+}

@@ -1,0 +1,29 @@
+# 🚀 Web Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+jinja2==3.1.2
+python-multipart==0.0.6
+
+# 🔧 Utilities
+python-dotenv==1.0.0
+itsdangerous>=2.0.0
+
+# 🗄️ Database
+psycopg2-binary==2.9.10
+
+# 🤖 AI & LangChain (호환 버전으로 통일)
+langchain>=0.2.0,<0.3.0
+langchain-core>=0.2.0,<0.3.0
+langchain-openai>=0.1.8,<0.2.0
+langchain-chroma>=0.1.0,<0.2.0
+langgraph>=0.2.0,<0.3.0
+
+# 📊 Vector Database & ML
+chromadb>=0.4.0,<0.5.0
+openai>=1.30.0,<2.0.0
+
+# 🔍 Monitoring (선택적)
+langsmith>=0.1.0
+
+# ☁️ Cloud Storage
+boto3>=1.28.0

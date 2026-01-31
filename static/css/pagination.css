@@ -1,0 +1,103 @@
+/* 페이지네이션 공통 스타일 */
+.pagination-container {
+    text-align: center;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    margin-bottom: 1em;
+}
+
+.pagination-btn {
+    background: white;
+    border: 1px solid rgba(185, 148, 147, 0.3);
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--primary-color);
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: rgba(185, 148, 147, 0.1);
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.page-numbers {
+    display: flex;
+    gap: 0.3em;
+    max-width: 200px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.page-numbers::-webkit-scrollbar {
+    display: none;
+}
+
+.page-btn {
+    background: white;
+    border: 1px solid rgba(185, 148, 147, 0.3);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--primary-color);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    font-size: 0.9em;
+    flex-shrink: 0;
+}
+
+.page-btn:hover {
+    background: rgba(185, 148, 147, 0.1);
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+.page-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.pagination-info {
+    color: var(--font-color-light);
+    font-size: 0.85em;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .pagination-btn, .page-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .page-btn {
+        font-size: 0.8em;
+    }
+
+    .pagination-info {
+        font-size: 0.8em;
+    }
+}

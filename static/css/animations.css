@@ -1,0 +1,277 @@
+/* =========================
+   청첩장 오프닝 애니메이션 CSS
+   static/css/animations.css
+========================= */
+
+/* =========================
+   폰트 정의
+========================= */
+
+/* Parisienne 폰트는 HTML에서 Google Fonts로 로드됨 */
+
+/* 기타 폰트 (Playfair Display, Montserrat) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap');
+
+/* =========================
+   오프닝 애니메이션 - 기본 구조
+========================= */
+
+.intro-animation-overlay {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 650px; /* 메인 컨텐츠(600px)보다 살짝 넓게 */
+    height: 100%;
+    z-index: 10000;
+    background: #000;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: opacity;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5); /* 경계선 부드럽게 처리 */
+    
+    /* 수정: 초기 상태는 display: block 이지만, 내부 컨텐츠가 준비될 때까지 불투명 */
+    /* visibility: hidden을 쓰면 Vara.js가 크기 계산을 못할 수 있음 */
+    opacity: 1; /* 깜빡임 방지를 위해 일단 보이게 설정하고, JS에서 제어하거나 아래 ready 로직 보완 */
+}
+
+/* 준비 중일 때 (JS 로딩 전) 화면을 가려줄 스타일 필요 */
+/* body에 intro-active 클래스가 있을 때 오버레이가 최상단 유지 */
+body.intro-active .intro-animation-overlay {
+    display: block;
+}
+
+/* 컨텐츠 로딩 전 상태 */
+.intro-animation-overlay:not(.ready) .intro-scene {
+    opacity: 0;
+}
+
+.intro-animation-overlay.ready .intro-scene {
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+/* Scene 기본 설정 */
+.intro-scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+/* 배경 이미지 */
+.intro-bg-image {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.7);
+    z-index: 1;
+}
+
+/* 컨텐츠 컨테이너 */
+.intro-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+/* 메인 텍스트 컨테이너 (Vara.js가 사용할 영역) */
+.intro-main-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* 높이를 내용물에 맞게 자동 조정되도록 수정하되, 최소 높이는 유지 */
+    height: auto;
+    margin-bottom: 20px;
+    z-index: 10; /* 텍스트가 이미지 위에 오도록 확실히 */
+}
+
+/* Vara.js SVG 스타일 */
+#vara-container svg {
+    overflow: visible;
+    width: 100%;
+    /* SVG 높이를 제한하여 불필요한 공간 차지 방지 */
+    max-height: 80vh; 
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+#vara-container path {
+    /* Vara가 path를 그릴 때 stroke 스타일이 적용됨 */
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* 하단 텍스트 */
+.intro-bottom-text {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: #FFFFFF;
+    letter-spacing: 0.25em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    opacity: 1;
+}
+
+
+/* =========================
+   Scene 1 애니메이션: 왼쪽에서 오른쪽으로 슬라이드
+========================= */
+
+/* Scene 1 슬라이드인 */
+.intro-scene-1 {
+    animation: slideInFromLeft 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Scene 1 이미지 슬라이드인 - transform이 이미 중앙 정렬에 사용되므로 animation에서 주의 필요 */
+.intro-scene-1 .intro-bg-image {
+    /* 기존 transform: translateX(-50%)를 유지하면서 슬라이드 효과를 주기 위해 keyframe 수정 필요하지만,
+       이미지는 고정하고 scene 전체가 움직이는 것이 더 자연스러울 수 있음.
+       또는 animation 내에서 transform: translateX(-50%)를 포함해야 함. */
+    animation: bgSlideInFromLeft 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Scene 1 텍스트 슬라이드인 */
+.intro-scene-1 .intro-content {
+    animation: slideInFromLeft 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Scene 1 페이드아웃 (이벤트 기반으로 변경 - delay 제거) */
+.intro-scene-1.fade-out {
+    animation: fadeOutScene 1.0s ease-out forwards;
+}
+
+.intro-scene-1.fade-out .intro-bg-image {
+    animation: fadeOutScene 1.0s ease-out forwards;
+}
+
+.intro-scene-1.fade-out .intro-content {
+    animation: fadeOutScene 1.0s ease-out 0.3s forwards;
+}
+
+/* 전체 오버레이 페이드아웃 */
+.intro-animation-overlay.hide {
+    animation: overlayFadeOut 0.5s ease-out forwards;
+}
+
+/* =========================
+   키프레임 애니메이션
+========================= */
+
+/* 왼쪽에서 오른쪽으로 슬라이드 */
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+        visibility: hidden;
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+        visibility: visible;
+    }
+}
+
+/* 배경 이미지용 슬라이드 (중앙 정렬 유지) */
+@keyframes bgSlideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(calc(-50% - 50px));
+        visibility: hidden;
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%);
+        visibility: visible;
+    }
+}
+
+/* 페이드아웃 */
+@keyframes fadeOutScene {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+}
+
+/* 모바일 반응형 - 오버레이 너비 꽉 차게 */
+@media (max-width: 768px) {
+    .intro-animation-overlay {
+        max-width: 100%;
+        left: 0;
+        transform: none;
+    }
+    
+    .intro-bg-image {
+        left: 0;
+        transform: none;
+    }
+    
+    /* 모바일용 배경 이미지 슬라이드 (중앙 정렬 로직 제거) */
+    @keyframes bgSlideInFromLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+            visibility: hidden;
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+            visibility: visible;
+        }
+    }
+    
+    .intro-line {
+        font-size: 3.2rem;
+    }
+    .intro-line-1, .intro-line-2 {
+        font-size: 3.2rem;
+    }
+    .intro-line-3 {
+        font-size: 2.4rem;
+    }
+    .intro-bottom-text {
+        padding: 0 20px;
+        font-size: 0.75rem;
+        letter-spacing: 0.2em;
+    }
+    
+    .intro-main-text {
+        min-height: 250px;
+    }
+}

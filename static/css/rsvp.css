@@ -1,0 +1,465 @@
+/* 참석 의사 전달 안내 모달 */
+.attendance-notice-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5em;
+    backdrop-filter: blur(5px);
+}
+
+.attendance-notice-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 480px;
+    width: 100%;
+    padding: 2.5em 2em;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: modalFadeIn 0.3s ease-out;
+    box-sizing: border-box;
+    position: relative;
+    margin: 0 auto;
+}
+
+/* X 닫기 버튼 */
+.attendance-notice-close {
+    position: absolute;
+    top: 1.2em;
+    right: 1.2em;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #000;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.attendance-notice-close:hover {
+    background: rgba(0, 0, 0, 0.05);
+    transform: scale(1.1);
+}
+
+.attendance-notice-close i,
+.attendance-notice-close svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+}
+
+.attendance-notice-title {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 1.2em;
+    letter-spacing: 0.5px;
+}
+
+.attendance-notice-description {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #000;
+    margin-bottom: 2em;
+}
+
+.attendance-notice-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #ddd, transparent);
+    margin: 2em 0;
+}
+
+.attendance-notice-info {
+    margin-bottom: 2.5em;
+    text-align: left;
+}
+
+.attendance-notice-info .info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    margin-bottom: 1em;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.95rem;
+    color: #000;
+}
+
+.attendance-notice-info .info-item i,
+.attendance-notice-info .info-item svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: #000;
+}
+
+.attendance-notice-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+}
+
+.attendance-notice-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    padding: 1.1em 1.5em;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.attendance-notice-btn i,
+.attendance-notice-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.attendance-notice-btn.primary {
+    background: #2c2c2c;
+    color: white;
+    box-shadow: 0 4px 15px rgba(44, 44, 44, 0.3);
+}
+
+.attendance-notice-btn.primary:hover {
+    background: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(44, 44, 44, 0.4);
+}
+
+.attendance-notice-btn.secondary {
+    background: #e8e8e8;
+    color: #666;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.attendance-notice-btn.secondary:hover {
+    background: #d5d5d5;
+    color: #555;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .attendance-notice-content {
+        padding: 2em 1.5em;
+    }
+
+    .attendance-notice-title {
+        font-size: 1.5rem;
+    }
+
+    .attendance-notice-description {
+        font-size: 0.95rem;
+    }
+
+    .attendance-notice-info .info-item {
+        font-size: 0.9rem;
+    }
+
+    .attendance-notice-btn {
+        font-size: 0.95rem;
+        padding: 1em 1.2em;
+    }
+}
+
+/* RSVP 섹션 */
+.rsvp-section {
+    padding: 4em 2em;
+    background-color: var(--white);
+}
+
+.rsvp-section .header {
+    text-align: center;
+    margin-bottom: 2.5em;
+}
+
+.rsvp-section .title {
+    color: var(--primary-color);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    letter-spacing: 1px;
+}
+
+.rsvp-section .subtitle {
+    color: var(--font-color-light);
+    font-size: 0.9em;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.rsvp-content {
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.couple-names {
+    margin: 2em 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    word-spacing: 0;
+    letter-spacing: 0;
+}
+
+.couple-names .groom-name {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--font-color-default);
+    text-align: center;
+    margin-right: 1em;
+}
+
+.couple-names .bride-name {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--font-color-default);
+    text-align: center;
+    margin-left: 1em;
+}
+
+.heart {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.wedding-info {
+    margin-bottom: 3em;
+    line-height: 1.8;
+}
+
+.wedding-date {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--font-color-default);
+    margin: 0 0 0.3em 0;
+}
+
+.wedding-time {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0 0 1em 0;
+}
+
+.wedding-venue {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1rem;
+    color: #888;
+    margin: 0;
+}
+
+.rsvp-button {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-color-light));
+    color: white;
+    border: none;
+    padding: 1.2em 3em;
+    border-radius: 50px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 20px rgba(185, 148, 147, 0.3);
+    letter-spacing: 0.02em;
+}
+
+.rsvp-button:hover {
+    background: linear-gradient(135deg, var(--primary-color-dark), var(--primary-color));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(185, 148, 147, 0.4);
+}
+
+/* 동행인 수 선택기 - 크기 조정 */
+.companion-count-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2em;  /* 간격 더 증가 */
+    max-width: 260px;  /* 최대 너비도 증가 */
+    margin: 1.2em auto 0;
+}
+
+.count-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;   /* 48px -> 60px */
+    height: 60px;  /* 48px -> 60px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    font-size: 2em;  /* 아이콘 크기 더 증가 */
+    font-weight: bold;
+    box-shadow: 0 3px 12px rgba(185, 148, 147, 0.4);  /* 그림자 강화 */
+}
+
+.count-btn:hover:not(:disabled) {
+    background: var(--primary-color-dark);
+    transform: scale(1.1);
+    box-shadow: 0 5px 16px rgba(185, 148, 147, 0.5);
+}
+
+.count-btn:active:not(:disabled) {
+    transform: scale(1.05);
+}
+
+.count-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.count-btn svg {
+    width: 28px !important;  /* 아이콘 크기도 증가 */
+    height: 28px !important;
+    stroke-width: 2.5 !important;  /* 선 굵기 증가 */
+}
+
+.count-input {
+    width: 70px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 600;
+    border: 2px solid rgba(185, 148, 147, 0.3);
+    border-radius: 8px;
+    padding: 0;
+    line-height: 40px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--primary-color);
+    box-sizing: border-box;
+}
+
+.count-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(185, 148, 147, 0.1);
+}
+
+.companion-hint {
+    margin-top: 0.8em;
+    font-size: 0.85em;
+    color: #888;
+    text-align: center;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .rsvp-section {
+        padding: 3em 1.5em;
+    }
+
+    .couple-names {
+        flex-direction: column;
+        gap: 0;
+        margin: 1.5em 0;
+        width: 100%;
+        align-items: center;
+    }
+
+    .couple-names .groom-name {
+        margin: 0;
+        margin-bottom: 0.3em;
+    }
+
+    .couple-names .bride-name {
+        margin: 0;
+        margin-top: 0.3em;
+    }
+
+    .heart {
+        margin: 0;
+        padding: 0;
+    }
+
+    .companion-count-selector {
+        max-width: 240px;
+        gap: 1em;
+        margin: 1em auto 0;
+    }
+
+    .count-btn {
+        width: 56px;   /* 모바일에서도 크게 */
+        height: 56px;
+        font-size: 1.8em;
+    }
+
+    .count-btn svg {
+        width: 26px !important;
+        height: 26px !important;
+        stroke-width: 2.5 !important;
+    }
+
+    .count-input {
+        width: 65px;
+        height: 38px;
+        line-height: 38px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .companion-count-selector {
+        max-width: 220px;
+        gap: 0.8em;
+    }
+
+    .count-btn {
+        width: 52px;   /* 작은 화면에서도 충분히 크게 */
+        height: 52px;
+        font-size: 1.6em;
+    }
+
+    .count-btn svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .count-input {
+        width: 60px;
+        height: 36px;
+        line-height: 36px;
+        font-size: 0.95em;
+    }
+}

@@ -1,0 +1,12 @@
+/* CSS 변수 정의 */
+:root {
+    --primary-color: #B99493;
+    --primary-color-light: #d2bdbc;
+    --primary-color-dark: #8e5f5d;
+    --white: #FFF;
+    --bg-color: #EFEAE4;
+    --font-color-default: #434343;
+    --font-color-light: #a3a3a3;
+    --content-max-width: 600px;
+    font-size: 0.9375em; /* 15px when default is 16px */
+}

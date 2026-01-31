@@ -1,0 +1,186 @@
+/* 기본 스타일 초기화 */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+    /* 모바일에서 확대/축소 및 좌우 스크롤 방지 */
+    overflow-x: hidden;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--bg-color);
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+    /* 모바일에서 좌우 스크롤 방지 */
+    position: relative;
+    width: 100%;
+    max-width: 100vw;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+/* 폰트 클래스 */
+.kr {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--font-color-default);
+    word-break: keep-all;
+}
+
+.en {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    color: var(--font-color-default);
+}
+
+.en-sacramento {
+    font-family: 'Sacramento', serif;
+    font-weight: 400;
+    color: var(--font-color-default);
+}
+
+/* 이미지 최적화 */
+img, picture, video, canvas {
+    display: block;
+    max-width: 100%;
+    /* 이미지 렌더링 최적화 */
+    content-visibility: auto;
+}
+
+/* GPU 가속 및 레이아웃 최적화 */
+.photo-grid,
+.messages-list,
+.accordion-container {
+    contain: layout style;
+}
+
+/* 입력 요소 초기화 */
+input, button, textarea, select {
+    font: inherit;
+}
+
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: inherit;
+}
+
+/* 섹션 공통 스타일 */
+section.cover,
+section.letter,
+section.gallery,
+section.calendar,
+section.location,
+section.account-trapezoid,
+section.rsvp-section,
+section.qna-section,
+section.guestbook-section,
+section.video-section,
+section.share-section {
+    max-width: var(--content-max-width);
+    margin: auto;
+}
+
+/* 유틸리티 클래스 */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* 스크롤바 스타일링 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color-dark);
+}
+
+/* 포커스 스타일 */
+button:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* 선택 영역 스타일 */
+::selection {
+    background: rgba(185, 148, 147, 0.3);
+    color: var(--font-color-default);
+}
+
+/* 애니메이션 비활성화 옵션 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* 프린트 스타일 */
+@media print {
+    .music-control,
+    .lightbox-overlay,
+    .modal-overlay,
+    .share-toast,
+    .autoplay-prompt {
+        display: none !important;
+    }
+
+    body {
+        background: white !important;
+    }
+
+    .cover {
+        background: none !important;
+        color: black !important;
+    }
+}

@@ -1,0 +1,359 @@
+/* Wave */
+.share-top-wave {
+    width: 100%;
+    height: 60px;
+    display: block;
+    margin: 0;
+    padding: 0;
+    vertical-align: bottom;
+    overflow: hidden;
+}
+
+/* Wave 애니메이션 */
+.parallax-waves > use:nth-child(1) {
+    animation: moveWave1 10s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+
+.parallax-waves > use:nth-child(2) {
+    animation: moveWave2 8s cubic-bezier(.55,.5,.45,.5) -.125s infinite;
+}
+
+.parallax-waves > use:nth-child(3) {
+    animation: moveWave3 6s cubic-bezier(.55,.5,.45,.5) -.25s infinite;
+}
+
+.parallax-waves > use:nth-child(4) {
+    animation: moveWave4 4s cubic-bezier(.55,.5,.45,.5) -.375s infinite;
+}
+
+@keyframes moveWave1 {
+    0% {
+        transform: translate3d(-90px,0,0);
+    }
+    100% { 
+        transform: translate3d(85px,0,0);
+    }
+}
+
+@keyframes moveWave2 {
+    0% {
+        transform: translate3d(-90px,0,0);
+    }
+    100% { 
+        transform: translate3d(85px,0,0);
+    }
+}
+
+@keyframes moveWave3 {
+    0% {
+        transform: translate3d(-90px,0,0);
+    }
+    100% { 
+        transform: translate3d(85px,0,0);
+    }
+}
+
+@keyframes moveWave4 {
+    0% {
+        transform: translate3d(-90px,0,0);
+    }
+    100% { 
+        transform: translate3d(85px,0,0);
+    }
+}
+
+/* 공유 섹션 */
+.share-section {
+    background: var(--white);
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.share-section svg {
+    display: block;
+    margin-bottom: -1px;
+}
+
+/* 이미지 컨테이너 */
+.share-image-container {
+    position: relative;
+    width: 100%;
+    height: 650px;
+    overflow: hidden;
+}
+
+.share-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* 상단 흰색 그라데이션 */
+.share-gradient-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 하단 흰색 그라데이션 */
+.share-gradient-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 텍스트 */
+.share-text-overlay {
+    position: absolute;
+    bottom: 20%;
+    left: 2em;
+    text-align: left;
+    color: #fff;
+    z-index: 2;
+    padding: 0;
+    max-width: 80%;
+}
+
+.share-message {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.1em;
+    font-weight: 400;
+    line-height: 2;
+    margin: 0;
+    letter-spacing: 0.02em;
+    word-break: keep-all;
+    color: #fff;
+}
+
+/* 공유 버튼 컨테이너 */
+.share-button-container {
+    display: flex;
+    justify-content: center;
+    padding: 2em 0;
+    background: var(--white);
+}
+
+/* 카카오톡 공유 버튼 */
+.share-kakao-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+
+    padding: 0.8em 1.5em;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    /* 모바일에서 잘리지 않도록 최대 너비와 여백 설정 */
+    max-width: calc(100% - 3em);
+    box-sizing: border-box;
+}
+
+.share-kakao-button:hover {
+    opacity: 0.7;
+}
+
+.share-kakao-button:active {
+    opacity: 0.5;
+}
+
+.share-kakao-button img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.share-kakao-button span {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    font-size: 1.1em;
+    color: #191919;
+    white-space: nowrap;
+}
+
+/* 토스트 메시지 */
+.share-toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 1em 2em;
+    border-radius: 25px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    z-index: 10000;
+    animation: toastFadeIn 0.3s ease-out;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes toastFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* 저작권 */
+.share-copyright {
+    text-align: center;
+    padding: 1.5em 0 3em;
+    background: var(--white);
+}
+
+.share-copyright p {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.85em;
+    color: #999;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+.share-copyright strong {
+    font-weight: 600;
+    color: #666;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .share-image-container {
+        height: 550px;
+    }
+
+    .share-gradient-top,
+    .share-gradient-bottom {
+        height: 120px;
+    }
+
+    .share-text-overlay {
+        bottom: 18%;
+        left: 1.5em;
+    }
+
+    .share-message {
+        font-size: 1em;
+    }
+
+    .share-kakao-button {
+        padding: 0.75em 1.4em;
+        gap: 0.5em;
+    }
+
+    .share-kakao-button img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .share-kakao-button span {
+        font-size: 1.05em;
+    }
+}
+
+@media (max-width: 480px) {
+    .share-image-container {
+        height: 480px;
+    }
+
+    .share-gradient-top,
+    .share-gradient-bottom {
+        height: 100px;
+    }
+
+    .share-text-overlay {
+        bottom: 15%;
+        left: 1.2em;
+    }
+
+    .share-message {
+        font-size: 0.95em;
+        line-height: 1.9;
+    }
+
+    .share-button-container {
+        padding: 1.5em 0;
+    }
+
+    .share-kakao-button {
+        padding: 0.7em 1.3em;
+        gap: 0.45em;
+        border-radius: 8px;
+        max-width: calc(100% - 2em);
+    }
+
+    .share-kakao-button img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .share-kakao-button span {
+        font-size: 1.0em;
+    }
+
+    .share-copyright {
+        padding: 1em 0 2.5em;
+    }
+
+    .share-copyright p {
+        font-size: 0.8em;
+    }
+}
+
+/* 매우 작은 화면 (아이폰 SE, 갤럭시 S 등) */
+@media (max-width: 390px) {
+    .share-kakao-button {
+        padding: 0.65em 1.1em;
+        gap: 0.4em;
+        max-width: calc(100% - 1.5em);
+    }
+
+    .share-kakao-button img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .share-kakao-button span {
+        font-size: 0.95em;
+    }
+}
+
+/* 초소형 화면 (아이폰 5/SE 1세대 등) */
+@media (max-width: 340px) {
+    .share-kakao-button {
+        padding: 0.6em 1em;
+        gap: 0.35em;
+        max-width: calc(100% - 1em);
+    }
+
+    .share-kakao-button img {
+        width: 18px;
+        height: 18px;
+    }
+
+    .share-kakao-button span {
+        font-size: 0.9em;
+    }
+}

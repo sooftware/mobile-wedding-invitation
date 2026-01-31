@@ -1,0 +1,110 @@
+/* Footer 섹션 - 축소된 버전 */
+.footer-section {
+    background: linear-gradient(to bottom, #FFFFFF 0%, #F5F0F0 100%);
+    padding: 2em 1.5em 1.5em 1.5em;
+    text-align: center;
+    border-top: 1px solid rgba(185, 148, 147, 0.2);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+}
+
+.footer-content {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8em;
+}
+
+.footer-couple {
+    margin-bottom: 0.2em;
+}
+
+.footer-names {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    letter-spacing: 0.05em;
+}
+
+.footer-date {
+    font-size: 0.9em;
+    color: var(--font-color-light);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+
+.footer-divider {
+    width: 45px;
+    height: 1.5px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    margin: 0.5em 0;
+}
+
+.footer-copyright {
+    margin-top: 0.5em;
+    padding-top: 0.8em;
+    border-top: 1px solid rgba(185, 148, 147, 0.15);
+    width: 100%;
+}
+
+.footer-copyright p {
+    font-size: 0.7em;
+    color: var(--font-color-light);
+    opacity: 0.8;
+}
+
+/* 방문자 통계 크기 축소 */
+.visitor-stats {
+    font-size: 0.85em;
+    margin-bottom: 0.5em;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .footer-section {
+        padding: 1.5em 1em 1em 1em;
+        max-width: var(--content-max-width);
+        margin: 0 auto;
+    }
+
+    .footer-names {
+        font-size: 1.2rem;
+    }
+
+    .footer-date {
+        font-size: 0.85em;
+    }
+
+    .footer-divider {
+        width: 40px;
+    }
+
+    .footer-copyright p {
+        font-size: 0.65em;
+    }
+
+    .visitor-stats {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-section {
+        padding: 1.2em 0.8em 0.8em 0.8em;
+        max-width: var(--content-max-width);
+        margin: 0 auto;
+    }
+
+    .footer-names {
+        font-size: 1.1rem;
+    }
+
+    .footer-date {
+        font-size: 0.8em;
+    }
+
+    .footer-copyright p {
+        font-size: 0.6em;
+    }
+}

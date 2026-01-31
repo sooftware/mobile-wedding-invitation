@@ -1,0 +1,7 @@
+/*
+ * 🚀 성능 최적화: Self-hosted 폰트 제거
+ * - Noto Sans KR: 10MB Variable Font 제거 → Google Fonts 사용 (훨씬 작고 빠름)
+ * - Spectral: 사용하지 않음, 제거
+ *
+ * Google Fonts에서 필요한 웨이트만 로드하므로 훨씬 효율적입니다.
+ */

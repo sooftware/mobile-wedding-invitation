@@ -1,0 +1,514 @@
+/* Custom Overrides for Mobile Wedding Invitation */
+/* Location 섹션 배경을 흰색으로 변경 + 상단 패딩 줄이기 */
+
+.location {
+    background-color: var(--white) !important;
+    padding: 2em 2em 4em 2em !important;
+}
+
+/* 공유 섹션 배경색을 확실히 흰색으로 설정 */
+.share-section {
+    background-color: #FFFFFF !important;
+    padding: 2em 0;
+}
+
+.image-overlay-share {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
+/* 기존 location-top-wave 관련 스타일 무효화 */
+.location-top-wave {
+    display: none !important;
+}
+
+/* 지도 버튼 배경 색상 제거 (아이콘과 텍스트만 표시) */
+.map-buttons-container {
+    background: transparent !important;
+}
+
+.map-button {
+    background: transparent !important;
+}
+
+.map-button:hover {
+    background: transparent !important;
+}
+
+/* 주소 텍스트 스타일 */
+.address-text {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1em;
+    color: var(--primary-color);
+    margin-top: 0.5em;
+    text-align: center;
+}
+
+/* === 계좌 정보 아코디언 스타일 (FAQ 스타일과 동일하게 맞춤) === */
+
+/* 1. 아이템 컨테이너 (FAQ의 .accordion-item 대응) */
+.account-accordion-item {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(185, 148, 147, 0.2) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    overflow: hidden !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    margin-bottom: 1em !important; /* 아이템 간 간격 */
+}
+
+.account-accordion-item.active {
+    background: white !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 4px 20px rgba(185, 148, 147, 0.2) !important;
+}
+
+.account-accordion-item:hover {
+    box-shadow: 0 4px 16px rgba(185, 148, 147, 0.15) !important;
+    border-color: rgba(185, 148, 147, 0.4) !important;
+}
+
+/* 2. 버튼 스타일 (FAQ의 .accordion-header 대응) */
+.account-accordion-button {
+    width: 100% !important;
+    padding: 1.2em 1.5em !important;
+    background: none !important; /* 배경 투명 */
+    border: none !important; /* 테두리 제거 */
+    text-align: left !important;
+    cursor: pointer !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    font-family: 'Noto Sans KR', sans-serif !important;
+    font-size: 1.1em !important;
+    font-weight: 600 !important;
+    color: var(--font-color-default) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    border-radius: 0 !important; /* 둥근 모서리는 부모 item이 담당 */
+    margin: 0 !important; /* 마진 초기화 */
+    box-shadow: none !important; /* 버튼 자체 그림자 제거 */
+}
+
+.account-accordion-button:hover {
+    background: rgba(185, 148, 147, 0.05) !important;
+}
+
+/* 왼쪽 그라데이션 바 효과 */
+.account-accordion-button::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--primary-color), transparent);
+    transition: width 0.3s ease;
+}
+
+.account-accordion-button:hover::before {
+    width: 4px;
+}
+
+/* 펼쳐졌을 때 버튼 스타일 */
+.account-accordion-item.active .account-accordion-button {
+    border-bottom: 1px solid rgba(185, 148, 147, 0.1) !important; /* 구분선 추가 */
+}
+
+/* 3. 아이콘 스타일 */
+.account-accordion-button .accordion-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--primary-color) !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    opacity: 1 !important; /* 항상 보임 */
+    display: block !important;
+    margin-left: 0 !important;
+}
+
+.account-accordion-item.active .account-accordion-button .accordion-icon {
+    transform: rotate(180deg) !important;
+}
+
+/* 4. 컨텐츠 영역 (FAQ의 .accordion-content 대응) */
+.account-accordion-content,
+.account-details-container {
+    background: rgba(185, 148, 147, 0.02) !important; /* 연한 배경색 */
+    border: none !important; /* 테두리는 item이 담당 */
+    border-radius: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    /* max-height는 JS가 제어하므로 transition만 */
+    transition: max-height 0.3s ease;
+}
+
+/* 내부 카드 스타일 오버라이드 (투명하게) */
+.account-accordion-content .account-card {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(185, 148, 147, 0.1) !important;
+    box-shadow: none !important;
+    padding: 1.5em !important;
+}
+
+.account-accordion-content .account-card:last-child {
+    border-bottom: none !important;
+}
+
+/* 텍스트 정렬 */
+.button-text {
+    text-align: left !important;
+    flex: 1;
+}
+
+/* === 사진 업로드 섹션 === */
+.photo-upload-section {
+    background: var(--bg-color) !important; /* 양 옆 여백은 베이지색 */
+    padding: 4em 0;
+    position: relative;
+}
+
+/* 내부 컨텐츠 래퍼 (중앙만 흰색) */
+.photo-upload-section > * {
+    max-width: var(--content-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2em;
+    padding-right: 2em;
+    background: white; /* 모든 직접 자식에 흰색 배경 */
+}
+
+/* Snaps 헤더 이미지 */
+.snaps-header-image {
+    display: block;
+    margin: 0 auto 0 auto !important;
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    padding: 2em 2em 0 2em !important; /* 상단 패딩만 */
+    background: white;
+    border-radius: 16px 16px 0 0;
+}
+
+.photo-upload-section .header {
+    text-align: center;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    background: white;
+    padding: 1em 2em 2em 2em !important;
+    border-radius: 0; /* 중간 요소는 둥글지 않게 */
+}
+
+.photo-upload-section .photo-upload-container {
+    background: white;
+    padding: 0 2em 3em 2em !important;
+    margin-top: 0 !important;
+    border-radius: 0 0 16px 16px;
+}
+
+.photo-upload-section .title {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5em;
+    letter-spacing: 1px;
+}
+
+.photo-upload-section .subtitle {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.9em;
+    color: var(--font-color-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    line-height: 1.4;
+}
+
+.photo-upload-container {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+}
+
+.upload-info {
+    margin-bottom: 2em;
+    text-align: center;
+    background: white;
+    border: 1px solid rgba(185, 148, 147, 0.2);
+    border-radius: 16px;
+    padding: 2em;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.upload-description {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.95em;
+    color: #666;
+    line-height: 1.6;
+}
+
+#photo-upload-form {
+    background: white;
+    border: 1px solid rgba(185, 148, 147, 0.2);
+    border-radius: 16px;
+    padding: 2.5em;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.form-group {
+    margin-bottom: 1.5em;
+}
+
+.form-label {
+    display: block;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5em;
+    font-size: 0.95em;
+}
+
+.required {
+    color: var(--primary-color);
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.8em;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.file-upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 12px;
+    padding: 2em;
+    text-align: center;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.file-upload-area:hover,
+.file-upload-area.dragover {
+    border-color: var(--primary-color);
+    background: #fff5f5;
+}
+
+.file-upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8em;
+    cursor: pointer;
+    color: #666;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.file-upload-label i {
+    width: 48px;
+    height: 48px;
+    color: var(--primary-color);
+}
+
+.file-upload-hint {
+    font-size: 0.85em;
+    color: #999;
+}
+
+.file-preview {
+    margin-top: 1em;
+}
+
+.file-count {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1em;
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.8em;
+}
+
+.preview-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #e9ecef;
+}
+
+.preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.remove-preview-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.remove-preview-btn:hover {
+    background: rgba(255, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.photo-upload-button {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-color-light));
+    color: white;
+    border: none;
+    padding: 1em 2em;
+    border-radius: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 20px rgba(185, 148, 147, 0.3);
+}
+
+.photo-upload-button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(185, 148, 147, 0.4);
+}
+
+.photo-upload-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.upload-progress {
+    margin-top: 1.5em;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5em;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--primary-color);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .location {
+        padding: 1.5em 1em 3em 1em !important;
+    }
+
+    .address-text {
+        font-size: 0.9em;
+    }
+
+    .photo-upload-section {
+        padding: 3em 1em;
+    }
+
+    .snaps-header-image {
+        max-width: 180px;
+    }
+
+    .photo-upload-section .title {
+        font-size: 1.2rem;
+    }
+
+    .upload-info {
+        padding: 1.5em;
+    }
+
+    #photo-upload-form {
+        padding: 2em;
+    }
+
+    .file-upload-area {
+        padding: 1.5em;
+    }
+
+    .preview-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 0.6em;
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-upload-section {
+        padding: 2em 1em;
+    }
+
+    .snaps-header-image {
+        max-width: 150px;
+    }
+
+    .photo-upload-section .title {
+        font-size: 1.1rem;
+    }
+
+    .upload-info {
+        padding: 1.2em;
+    }
+
+    #photo-upload-form {
+        padding: 1.5em;
+    }
+
+    .file-upload-area {
+        padding: 1.2em;
+    }
+
+    .file-upload-label i {
+        width: 36px;
+        height: 36px;
+    }
+
+    .preview-grid {
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    }
+}

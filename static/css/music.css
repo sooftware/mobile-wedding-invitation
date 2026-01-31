@@ -1,0 +1,266 @@
+/* BGM 알림 배너 */
+.bgm-notification-banner {
+    position: fixed;
+    top: -80px; /* 초기에는 화면 밖에 숨김 */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #696A6A;
+    backdrop-filter: blur(10px);
+    border-radius: 0;
+    padding: 0.6em 1.5em; /* height 줄이기 */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 텍스트 왼쪽, 스피커 오른쪽 */
+    gap: 1em;
+    transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: auto; /* 스피커 클릭을 위해 */
+    max-width: var(--content-max-width);
+    width: 100%; /* 전체 너비 */
+}
+
+.bgm-notification-banner.show {
+    top: 0; /* 배너가 내려옴 */
+}
+
+.bgm-notification-text {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1em;
+    color: #ffffff;
+    font-weight: 500;
+    pointer-events: none; /* 텍스트는 클릭 불가 */
+}
+
+.bgm-notification-icon {
+    color: #ffffff;
+    width: 20px;
+    height: 20px;
+}
+
+/* 우측 상단 스피커 아이콘 컨트롤 */
+.bgm-speaker-control {
+    position: relative; /* 배너 안에 있을 때 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+/* 배너가 사라질 때 스피커를 우측 상단에 고정 */
+.bgm-speaker-control.detached {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    z-index: 2001;
+    transition: none !important; /* 배너와 독립적으로 즉시 고정 */
+}
+
+.bgm-speaker-button {
+    background: #696A6A;
+    backdrop-filter: blur(10px);
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 36px; /* 크기 줄이기 */
+    height: 36px; /* 크기 줄이기 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* 그림자도 약간 줄이기 */
+    padding: 0;
+    position: relative;
+}
+
+.bgm-speaker-button:hover:not(:disabled) {
+    background: #5a5b5b;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.bgm-speaker-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* SVG 아이콘 스타일 */
+.bgm-speaker-button svg[data-lucide] {
+    width: 20px !important; /* 아이콘 크기 줄이기 */
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    stroke-width: 2.5 !important;
+    display: block !important;
+    margin: 0 auto !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.bgm-speaker-button i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.music-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    min-width: 120px;
+}
+
+.time-display {
+    font-size: 0.75em;
+    color: var(--font-color-default);
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+}
+
+/* 자동재생 프롬프트 */
+.autoplay-prompt {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 2em 2.5em;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    border: 2px solid rgba(185, 148, 147, 0.3);
+    animation: fadeInPulse 0.8s ease-out;
+    text-align: center;
+}
+
+.prompt-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+    color: var(--primary-color);
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.prompt-message {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.prompt-buttons {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+}
+
+.prompt-button {
+    padding: 0.8em 2em;
+    border-radius: 25px;
+    border: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.prompt-button.yes {
+    background: var(--primary-color);
+    color: white;
+}
+
+.prompt-button.yes:hover {
+    background: var(--primary-color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(185, 148, 147, 0.3);
+}
+
+.prompt-button.no {
+    background: #f5f5f5;
+    color: #666;
+}
+
+.prompt-button.no:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+@keyframes fadeInPulse {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .bgm-notification-banner {
+        padding: 0.5em 1.2em; /* height 더 줄이기 */
+        border-radius: 0; /* 직사각형 모양 */
+        width: 100%; /* 전체 너비 */
+    }
+
+    .bgm-notification-text {
+        font-size: 0.9em;
+    }
+
+    .bgm-notification-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .bgm-speaker-control.detached {
+        top: 8px; /* 모바일에서 detached 시 위치 */
+        right: 15px;
+    }
+
+    .bgm-speaker-button {
+        width: 32px; /* 모바일에서 더 작게 */
+        height: 32px;
+    }
+
+    .bgm-speaker-button svg[data-lucide] {
+        width: 18px !important; /* 모바일 아이콘 크기 */
+        height: 18px !important;
+        min-width: 18px !important;
+        min-height: 18px !important;
+        max-width: 18px !important;
+        max-height: 18px !important;
+    }
+
+    .autoplay-prompt {
+        padding: 1.5em 2em;
+        max-width: 90%;
+    }
+
+    .prompt-message {
+        font-size: 1em;
+    }
+
+    .prompt-button {
+        padding: 0.7em 1.5em;
+        font-size: 0.95em;
+    }
+}
