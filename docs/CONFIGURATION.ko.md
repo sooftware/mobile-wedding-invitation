@@ -149,8 +149,8 @@ iso = dt.isoformat()  # "2026-05-17T14:00:00"
       {
         "name": "김은희",                    // 예금주
         "bank": "국민은행",                  // 은행명
-        "number": "351-0943-4862-13",      // 계좌번호
-        "kakaopay_url": "https://qr.kakaopay.com/FFZ12zLKh"  // 카카오페이 URL
+        "number": "123-1234-1234-12",      // 계좌번호
+        "kakaopay_url": "https://qr.kakaopay.com/FFFFFFFFFF"  // 카카오페이 URL
       }
     ],
     "bride": [ ... ]
@@ -166,20 +166,20 @@ iso = dt.isoformat()  # "2026-05-17T14:00:00"
     {
       "name": "김은희",
       "bank": "국민은행",
-      "number": "351-0943-4862-13",
-      "kakaopay_url": "https://qr.kakaopay.com/FFZ12zLKh"
+      "number": "123-1234-1234-12",
+      "kakaopay_url": "https://qr.kakaopay.com/FFFFFFFFFF"
     },
     {
       "name": "김미자",
       "bank": "국민은행",
-      "number": "312256-02-036134",
-      "kakaopay_url": "https://qr.kakaopay.com/FFZ12zLKh"
+      "number": "123456-12-123456",
+      "kakaopay_url": "https://qr.kakaopay.com/FFFFFFFFFF"
     },
     {
       "name": "김수환",
       "bank": "카카오뱅크",
-      "number": "3333-06-1988716",
-      "kakaopay_url": "https://qr.kakaopay.com/FFZ12zLKh"
+      "number": "3333-06-1234567",
+      "kakaopay_url": "https://qr.kakaopay.com/FFFFFFFFFF"
     }
   ]
 }
@@ -206,7 +206,7 @@ iso = dt.isoformat()  # "2026-05-17T14:00:00"
 {
   "name": "김수환",
   "bank": "카카오뱅크",
-  "number": "3333-06-1988716",
+  "number": "3333-06-1234567",
   "kakaopay_url": ""  // 빈 문자열로 설정
 }
 ```
